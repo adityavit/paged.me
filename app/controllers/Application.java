@@ -20,16 +20,24 @@ public class Application extends Controller {
 		if (validation.hasErrors()) {
 			render("Application/index.html", Pattern.CASE_INSENSITIVE);
 		}
+		String regex = "." + value + "(\\{(([a-z]|-)*:(#([a-f0-9]{6}|[a-f0-9]{3})|([0-9a-z]|-)*);?)*?\\})";
 		
-//		Style style = new Style(field, value).save();
 		Style style = Style.find("byField", field).first();
 		String css = style.value;
+		String matched = "";
 		
-		Pattern pattern = Pattern.compile(".about(\\{(([a-z]|-)*:(#([a-f0-9]{6}|[a-f0-9]{3})|([0-9a-z]|-)*);?)*?\\})");
+		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(css);
 		
 		while(matcher.find()) {
-			System.out.println("matched" + matcher.start() + ", " + matcher.end() + ", " + matcher.group());
+			
+			matched = matcher.group();
+			matched = matched.replaceAll("font-size:([0-9a-z]|-)*", "font-size:80px");
+			
+			style.value = matcher.replaceAll(matched);
+			System.out.println(style.value);
+			
+			style.save();
 		}
 		
 		renderJSON(style);
