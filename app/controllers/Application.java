@@ -15,10 +15,11 @@ public class Application extends Controller {
 		
 		render(user, style);
 	}
-
+	
+	
 	public static void addStyle(String field, String value, String element, String elementValue) {
 		if (validation.hasErrors()) {
-			render("Application/index.html", Pattern.CASE_INSENSITIVE);
+			render("Application/index.html");
 		}
 		String regex = "." + value + "(\\{(([a-z]|-)*:(#([a-f0-9]{6}|[a-f0-9]{3})|([0-9a-z]|-)*);?)*?\\})";
 		
@@ -26,7 +27,7 @@ public class Application extends Controller {
 		String css = style.value;
 		String matched = "";
 		
-		Pattern pattern = Pattern.compile(regex);
+		Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(css);
 		
 		while(matcher.find()) {
@@ -35,8 +36,7 @@ public class Application extends Controller {
 			matched = matched.replaceAll(element+":(#([a-f0-9]{6}|[a-f0-9]{3})|([0-9a-z]|-)*)", element + ":" + elementValue);
 			
 			style.value = matcher.replaceAll(matched);
-			System.out.println(style.value);
-			
+//			System.out.println(style.value);
 			style.save();
 		}
 		
