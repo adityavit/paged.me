@@ -20,7 +20,7 @@
     #{/ifErrors}
     <p>
         <input type="text" name="field" id="field" value="${params.field}"/>
-        <input name="value" id="value">${params.value}</input>
+        <input name="value" id="value" value="${params.value}">
     </p>
     <p>
         <input type="submit" value="submit" id='submit' />
@@ -31,6 +31,8 @@
     $(function() {
         $("#form1").submit(function(){
             $.post('@{addStyle()}', $("#form1").serialize());
+            $(":input", "#form1").not(":submit").val("");
+//            $("#form1")[0].reset();
             return false;
         });
     });
