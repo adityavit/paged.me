@@ -40,7 +40,7 @@ User(crazyduck):
 
 Style(phoenix24):
     field:      phoenix24
-    value:      .body{background:red;}.name{font-size:60px;}.about{font-size:60px;font-family:arial;color:#ffffff;}.contact{color:#ffffff}.email{}
+    value:      .body{background:red;}.name{font-size:60px;}.about{font-size:60px;font-family:arial;color:#abcfff;}.contact{color:#abcfff;}.email{}
     
 Style(bluebat):
     field:      bluebat
