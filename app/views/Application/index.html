@@ -1,4 +1,28 @@
 #{extends 'main.html' /}
-#{set title:'Home' /}
+#{set title: user.name /}
 
-#{welcome /}
+<div class="name">
+    ${user.name}, 
+</div>
+<div class="about">
+    ${user.aboutme}, 
+</div>
+<div class="contact">
+    ${user.contact}, 
+</div>
+<div class="email">
+    ${user.email}
+</div>
+
+#{form @Application.addStyle()}
+    #{ifErrors}
+        <p class="error">all fields are required.</p>
+    #{/ifErrors}
+    <p>
+        <input type="text" name="field" id="field" value="${params.field}"/>
+        <input name="value" id="value">${params.value}</input>
+    </p>
+    <p>
+        <input type="submit" value="submit" />
+    </p>
+#{/form}
