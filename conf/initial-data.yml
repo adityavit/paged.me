@@ -38,3 +38,20 @@ User(crazyduck):
                 you know me, the duck who made you sing!
                 and, don't listen to those creeps calling names.
 
+Style(phoenix24):
+    field:      phoenix24
+    value:      .body{background:red;}.name{font:60px arial;}.about{font:60px arial;color:#ffffff;}.contact{}.email{}
+    
+Style(bluebat):
+    field:      bluebat
+    value:      .body{background:red;}.name{font:60px arial;}.about{font:60px arial;color:#ffffff;}.contact{}.email{}
+    
+Style(bobthecat):
+    field:      bobthecat
+    value:      .body{background:red;}.name{font:60px arial;}.about{font:60px arial;color:#ffffff;}.contact{}.email{}
+    
+Style(crazyduck):
+    field:      crazyduck
+    value:      .body{background:red;}.name{font:60px arial;}.about{font:60px arial;color:#ffffff;}.contact{}.email{}
+    
+    
