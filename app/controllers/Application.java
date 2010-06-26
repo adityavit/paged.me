@@ -16,7 +16,7 @@ public class Application extends Controller {
 		render(user, style);
 	}
 
-	public static void addStyle(String field, String value) {
+	public static void addStyle(String field, String value, String element, String elementValue) {
 		if (validation.hasErrors()) {
 			render("Application/index.html", Pattern.CASE_INSENSITIVE);
 		}
@@ -32,7 +32,7 @@ public class Application extends Controller {
 		while(matcher.find()) {
 			
 			matched = matcher.group();
-			matched = matched.replaceAll("font-size:([0-9a-z]|-)*", "font-size:80px");
+			matched = matched.replaceAll(element+":(#([a-f0-9]{6}|[a-f0-9]{3})|([0-9a-z]|-)*)", element + ":" + elementValue);
 			
 			style.value = matcher.replaceAll(matched);
 			System.out.println(style.value);

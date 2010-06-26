@@ -44,14 +44,13 @@ Style(phoenix24):
     
 Style(bluebat):
     field:      bluebat
-    value:      .body{background:red;}.name{font:60px arial;}.about{font:60px arial;color:#ffffff;}.contact{}.email{}
+    value:      .body{background:red;}.name{font-size:60px;}.about{font-size:60px;font-family:arial;color:#abcfff;}.contact{color:#abcfff;}.email{}
     
 Style(bobthecat):
     field:      bobthecat
-    value:      .body{background:red;}.name{font:60px arial;}.about{font:60px arial;color:#ffffff;}.contact{}.email{}
+    value:      .body{background:red;}.name{font-size:60px;}.about{font-size:60px;font-family:arial;color:#abcfff;}.contact{color:#abcfff;}.email{}
     
 Style(crazyduck):
     field:      crazyduck
-    value:      .body{background:red;}.name{font:60px arial;}.about{font:60px arial;color:#ffffff;}.contact{}.email{}
-    
+    value:      .body{background:red;}.name{font-size:60px;}.about{font-size:60px;font-family:arial;color:#abcfff;}.contact{color:#abcfff;}.email{}
     
