@@ -30,7 +30,7 @@
 <script type="text/javascript" charset="utf-8">
     $(function() {
         $("#form1").submit(function(){
-            $.post('/addstyle', $("#form1").serialize());
+            $.post('@{addStyle()}', $("#form1").serialize());
             return false;
         });
     });
