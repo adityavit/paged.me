@@ -25,7 +25,7 @@ public class Application extends Controller {
 		Style style = Style.find("byField", field).first();
 		String css = style.value;
 		
-		Pattern pattern = Pattern.compile(".name(\\{(([a-z]-?)*:(#([a-f0-9]{6}|[a-f0-9]{3})|([0-9a-z]-?)*);?)*?\\})");
+		Pattern pattern = Pattern.compile(".about(\\{(([a-z]|-)*:(#([a-f0-9]{6}|[a-f0-9]{3})|([0-9a-z]|-)*);?)*?\\})");
 		Matcher matcher = pattern.matcher(css);
 		
 		while(matcher.find()) {
