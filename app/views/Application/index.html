@@ -14,7 +14,7 @@
     ${user.email}
 </div>
 
-#{form @Application.addStyle()}
+#{form @Application.addStyle(), id:'form1'}
     #{ifErrors}
         <p class="error">all fields are required.</p>
     #{/ifErrors}
@@ -23,6 +23,15 @@
         <input name="value" id="value">${params.value}</input>
     </p>
     <p>
-        <input type="submit" value="submit" />
+        <input type="submit" value="submit" id='submit' />
     </p>
 #{/form}
+
+<script type="text/javascript" charset="utf-8">
+    $(function() {
+        $("#form1").submit(function(){
+            $.post('/addstyle', $("#form1").serialize());
+            return false;
+        });
+    });
+</script>
