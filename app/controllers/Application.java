@@ -25,7 +25,7 @@ public class Application extends Controller {
 		Style style = Style.find("byField", field).first();
 		String css = style.value;
 		
-		Pattern pattern = Pattern.compile(".contact(\\{(([a-z]-?)*:(^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|[0-9]*([a-z]-?)*;)*?)\\})");
+		Pattern pattern = Pattern.compile(".contact(\\{(([a-z]-?)*:([0-9a-z]-?)*;)*?\\})");
 		Matcher matcher = pattern.matcher(css);
 		
 		while(matcher.find()) {
