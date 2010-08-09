@@ -1,18 +1,18 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-
 <html>
   <head>
     <title>paged me!</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    #{press.stylesheet 'reset.css' /}
+    #{press.stylesheet 'text.css' /}
+    #{press.stylesheet '960_24_col.css' /}
     #{press.stylesheet 'main.css' /}
     #{press.compressed-stylesheet /}
     <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
   </head>
-  <body class="body">
+  <body class="container_24 body">
     <div class="name">Amigo!</div>
     <div class="about">this looks like a nice portfolio destination :D</div>
-    <div class="contact">go ahead, etch one for yourself</div>
-    <div class="email">help@paged.me</div>
     
     #{if request.user }
       #{form @Application.addStyle(), id:'form1'}
@@ -29,12 +29,28 @@
           <input type="submit" value="submit" id='submit' />
         </p>
       #{/form}
-    <div id="posted" class="posted"></div>
-    <ul></ul>
     #{/if}
+    
+    <div class="fb-banner">
+      <div class="contact">go ahead, etch one for yourself</div>
+      <div class="email">help@paged.me</div>
+      <div><fb:login-button></fb:login-button></div>
+    </div>
+    
+    <div id="fb-root"></div>
     <script src="@{'/public/javascripts/jquery-1.4.2.min.js'}" type="text/javascript" charset="utf-8"></script>
     <script src="http://connect.facebook.net/en_US/all.js"></script>
     #{press.script 'main.js' /}
     #{press.compressed-script /}
+    <script>
+      FB.init({appId: '121671684547934', status: true, cookie: true, xfbml: true});
+      FB.Event.subscribe('auth.sessionChange', function(response) {
+        if (response.session) {
+          // A user has logged in, and a new cookie has been saved
+        } else {
+          // The user has logged out, and the cookie has been cleared
+        }
+      });
+    </script>
   </body>
 </html>
