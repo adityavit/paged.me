@@ -1,10 +1,14 @@
 package controllers;
 
-import java.util.*;
-import java.util.regex.*;
-import play.mvc.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import models.*;
+import models.Style;
+import models.User;
+import play.mvc.Before;
+import play.mvc.Controller;
 
 public class Application extends Controller {
 

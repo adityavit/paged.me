@@ -8,6 +8,13 @@ import play.data.validation.*;
 
 @Entity
 public class User extends Model {
+	
+	@Required
+	public String fbuid;
+	
+	//name of the user's portfolio; subdomain;
+	@Required
+	public String folioname;
 
 	//user name; and the display name;
 	@Required
@@ -26,6 +33,11 @@ public class User extends Model {
 	@Required
 	public String contact;
 
+	public User(String folioname, String fbuid) {
+		this.fbuid= fbuid;
+		this.folioname = folioname;
+	}
+	
 	public User(String name, String email, String aboutme, String contact) {
 		this.name = name;
 		this.email = email;

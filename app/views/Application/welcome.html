@@ -15,27 +15,23 @@
     <div class="name">Amigo!</div>
     <div class="about">this looks like a nice portfolio destination :D</div>
     
-    #{if request.user }
+    #{if uid }
       #{form @Application.addStyle(), id:'form1'}
         #{ifErrors}
         <p class="error">all fields are required.</p>
         #{/ifErrors}
         <p>
-          <input type="text" name="field" id="field" value="${params.field}"/>
-          <input name="value" id="value" value="${params.value}">
-          <input name="element" id="element" value="${params.element}">
-          <input name="elementValue" id="elementValue" value="${params.elementValue}">
-        </p>
-        <p>
-          <input type="submit" value="submit" id='submit' />
+          <input type="text" id="fbuid" name="fbuid" value="${uid}"/>
+          <input type="text" id="folioname" name="folioname" value="${params.folioname}"/>
+          <input type="submit" value="make me a folio!" />
         </p>
       #{/form}
     #{/if}
     
     <div class="fb-banner">
-      <div class="contact"><a href="#">go ahead, etch one for yourself</a></div>
+      <div class="contact"><a href="https://graph.facebook.com/oauth/authorize?client_id=121671684547934&redirect_uri=http://tst.it/&type=user_agent&display=page&scope=user_photos,user_videos,publish_stream,email,user_about_me,user_birthday">go ahead, etch one for yourself</a></div>
     #{if !uid }
-      <div class="login"><fb:login-button></fb:login-button></div>
+      <div class="login"><fb:login-button perms="email,user_birthday"></fb:login-button></div>
     #{/if}
     </div>
     
