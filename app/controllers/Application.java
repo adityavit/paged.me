@@ -60,7 +60,6 @@ public class Application extends Controller {
 		Matcher matcher = pattern.matcher(css);
 
 		while (matcher.find()) {
-
 			matched = matcher.group();
 			matched = matched.replaceAll(element
 					+ ":(#([a-f0-9]{6}|[a-f0-9]{3})|([0-9a-z]|-)*)", element
@@ -69,7 +68,6 @@ public class Application extends Controller {
 			style.value = matcher.replaceAll(matched);
 			style.save();
 		}
-
 		renderJSON(style);
 	}
 
