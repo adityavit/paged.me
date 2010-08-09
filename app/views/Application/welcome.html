@@ -1,51 +1,40 @@
-#{extends 'main.html' /}
-#{set title: user.name /}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 
-<div class="name">
-    ${user.name}, 
-</div>
-<div class="about">
-    ${user.aboutme}, 
-</div>
-<div class="contact">
-    ${user.contact}, 
-</div>
-<div class="email">
-    ${user.email}
-</div>
-
-#{if request.user }
-#{form @Application.addStyle(), id:'form1'}
-    #{ifErrors}
+<html>
+  <head>
+    <title>paged me!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    #{press.stylesheet 'main.css' /}
+    #{press.compressed-stylesheet /}
+    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+  </head>
+  <body class="body">
+    <div class="name">Amigo!</div>
+    <div class="about">this looks like a nice portfolio destination :D</div>
+    <div class="contact">go ahead, etch one for yourself</div>
+    <div class="email">help@paged.me</div>
+    
+    #{if request.user }
+      #{form @Application.addStyle(), id:'form1'}
+        #{ifErrors}
         <p class="error">all fields are required.</p>
-    #{/ifErrors}
-    <p>
-        <input type="text" name="field" id="field" value="${params.field}"/>
-        <input name="value" id="value" value="${params.value}">
-        <input name="element" id="element" value="${params.element}">
-        <input name="elementValue" id="elementValue" value="${params.elementValue}">
-    </p>
-    <p>
-        <input type="submit" value="submit" id='submit' />
-    </p>
-#{/form}
-    <div id="posted" class="posted"></p>
-
-<ul>
-</ul>
-
-<script type="text/javascript" charset="utf-8">
-    $(function() {
-        $("#form1").submit(function(){
-            $.post('@{addStyle()}', $("#form1").serialize(), function(style){
-                $(":input", "#form1").not(":submit").val("");
-                $("ul").prepend('<li>' + style.field + '  :  '+ style.value + '</li>');
-//                $("#posted").html("successfully posted!" + style.field + ", " + style.value);
-            }, 'json');
-//            $("#form1")[0].reset();
-            return false;
-        });
-    });
-</script>
-
-#{/if}
+        #{/ifErrors}
+        <p>
+          <input type="text" name="field" id="field" value="${params.field}"/>
+          <input name="value" id="value" value="${params.value}">
+          <input name="element" id="element" value="${params.element}">
+          <input name="elementValue" id="elementValue" value="${params.elementValue}">
+        </p>
+        <p>
+          <input type="submit" value="submit" id='submit' />
+        </p>
+      #{/form}
+    <div id="posted" class="posted"></div>
+    <ul></ul>
+    #{/if}
+    <script src="@{'/public/javascripts/jquery-1.4.2.min.js'}" type="text/javascript" charset="utf-8"></script>
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    #{press.script 'main.js' /}
+    #{press.compressed-script /}
+  </body>
+</html>

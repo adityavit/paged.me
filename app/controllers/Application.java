@@ -26,40 +26,57 @@ public class Application extends Controller {
 	}
 
 	public static void index() {
-		String name = request.domain.replace(".tst.it", "");
-		User user = User.find("byName", name).first();
-		Style style = Style.find("byField", name).first();
+		//@todo .tst.it must not be hardcoded; please remove.
+//		String name = request.domain.replace(".tst.it", "");
+		String sbdomain[] = request.domain.split("\\.");
+		String name = sbdomain[0];
 		
-		render(user, style);
+		//@todo fix this nasty check.
+		if (name.equals("www") || name.equals("tst") || name.isEmpty() || name == null) {
+			render("Application/welcome.html");
+		} else {
+			User user = User.find("byName", name).first();
+			Style style = Style.find("byField", name).first();
+			
+			//user null check; throw 404.
+			notFoundIfNull(user);
+			
+			//user found, render the page.
+			render(user, style);
+		}
 	}
-	
-	
-	public static void addStyle(String field, String value, String element, String elementValue) {
+
+	public static void addStyle(String field, String value, String element,
+			String elementValue) {
 		if (validation.hasErrors()) {
 			render("Application/index.html");
 		}
-		String regex = "." + value + "(\\{(([a-z]|-)*:(#([a-f0-9]{6}|[a-f0-9]{3})|([0-9a-z]|-)*);?)*?\\})";
-		
+		String regex = "."
+				+ value
+				+ "(\\{(([a-z]|-)*:(#([a-f0-9]{6}|[a-f0-9]{3})|([0-9a-z]|-)*);?)*?\\})";
+
 		Style style = Style.find("byField", field).first();
 		String css = style.value;
 		String matched = "";
-		
+
 		Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(css);
-		
-		while(matcher.find()) {
-			
+
+		while (matcher.find()) {
+
 			matched = matcher.group();
-			matched = matched.replaceAll(element+":(#([a-f0-9]{6}|[a-f0-9]{3})|([0-9a-z]|-)*)", element + ":" + elementValue);
-			
+			matched = matched.replaceAll(element
+					+ ":(#([a-f0-9]{6}|[a-f0-9]{3})|([0-9a-z]|-)*)", element
+					+ ":" + elementValue);
+
 			style.value = matcher.replaceAll(matched);
 			style.save();
 		}
-		
+
 		renderJSON(style);
 	}
-	
-	public static void emailer(){
+
+	public static void emailer() {
 		render();
 	}
 }
