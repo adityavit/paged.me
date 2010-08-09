@@ -1,0 +1,51 @@
+#{extends 'main.html' /}
+#{set title: user.name /}
+
+<div class="name">
+    ${user.name}, 
+</div>
+<div class="about">
+    ${user.aboutme}, 
+</div>
+<div class="contact">
+    ${user.contact}, 
+</div>
+<div class="email">
+    ${user.email}
+</div>
+
+#{if request.user }
+#{form @Application.addStyle(), id:'form1'}
+    #{ifErrors}
+        <p class="error">all fields are required.</p>
+    #{/ifErrors}
+    <p>
+        <input type="text" name="field" id="field" value="${params.field}"/>
+        <input name="value" id="value" value="${params.value}">
+        <input name="element" id="element" value="${params.element}">
+        <input name="elementValue" id="elementValue" value="${params.elementValue}">
+    </p>
+    <p>
+        <input type="submit" value="submit" id='submit' />
+    </p>
+#{/form}
+    <div id="posted" class="posted"></p>
+
+<ul>
+</ul>
+
+<script type="text/javascript" charset="utf-8">
+    $(function() {
+        $("#form1").submit(function(){
+            $.post('@{addStyle()}', $("#form1").serialize(), function(style){
+                $(":input", "#form1").not(":submit").val("");
+                $("ul").prepend('<li>' + style.field + '  :  '+ style.value + '</li>');
+//                $("#posted").html("successfully posted!" + style.field + ", " + style.value);
+            }, 'json');
+//            $("#form1")[0].reset();
+            return false;
+        });
+    });
+</script>
+
+#{/if}
