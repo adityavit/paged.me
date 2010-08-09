@@ -33,8 +33,10 @@
     #{/if}
     
     <div class="fb-banner">
-      <div class="contact">go ahead, etch one for yourself</div>
+      <div class="contact"><a href="#">go ahead, etch one for yourself</a></div>
+    #{if !uid }
       <div class="login"><fb:login-button></fb:login-button></div>
+    #{/if}
     </div>
     
     <div id="fb-root"></div>
