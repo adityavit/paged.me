@@ -9,7 +9,7 @@ import models.*;
 public class Application extends Controller {
 
 	public static Map<String, String> FB_COOKIE_MAP = new HashMap<String, String>();
-	public static String FB_COOKIE = "fbs_121671684547934";
+	public static final String FB_COOKIE = "fbs_121671684547934";
 
 	@Before
 	public static void FBValidation() {
