@@ -1,3 +1,3 @@
-h3. My Page
+h3. paged.me
 
-This project could generate free web-pages for you! party!
+a simple application to make beautiful online folios!!
