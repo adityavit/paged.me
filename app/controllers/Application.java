@@ -8,40 +8,37 @@ import models.*;
 
 public class Application extends Controller {
 
-	public static Map<String, String> FBCookie = new HashMap<String, String>();
+	public static Map<String, String> FB_COOKIE_MAP = new HashMap<String, String>();
+	public static String FB_COOKIE = "fbs_121671684547934";
 
 	@Before
 	public static void FBValidation() {
 		String fbcookies[], val[];
-
-		if (request.cookies.containsKey("fbs_121671684547934")) {
-			fbcookies = request.cookies.get("fbs_121671684547934").value
-					.replace("\"", "").split("&");
+		if (request.cookies.containsKey(FB_COOKIE)) {
+			fbcookies = request.cookies.get(FB_COOKIE).value.replace("\"", "").split("&");
 			for (String arg : fbcookies) {
 				val = arg.split("=");
-				FBCookie.put(val[0], val[1]);
+				FB_COOKIE_MAP.put(val[0], val[1]);
 				renderArgs.put(val[0], val[1]);
 			}
 		}
 	}
 
 	public static void index() {
-		//@todo .tst.it must not be hardcoded; please remove.
-//		String name = request.domain.replace(".tst.it", "");
+		// get the subdomain, requested for.
 		String sbdomain[] = request.domain.split("\\.");
-		String name = sbdomain[0];
-		
-		//@todo fix this nasty check.
-		if (name.equals("www") || name.equals("tst") || name.isEmpty() || name == null) {
+
+		// @todo fix this nasty check.
+		if (sbdomain.length == 2 || sbdomain[0].equals("www")) {
 			render("Application/welcome.html");
 		} else {
-			User user = User.find("byName", name).first();
-			Style style = Style.find("byField", name).first();
-			
-			//user null check; throw 404.
+			User user = User.find("byName", sbdomain[0]).first();
+			Style style = Style.find("byField", sbdomain[0]).first();
+
+			// user null check; throw 404.
 			notFoundIfNull(user);
-			
-			//user found, render the page.
+
+			// user found, render the page.
 			render(user, style);
 		}
 	}
