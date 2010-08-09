@@ -1,11 +1,13 @@
 .body{ /* the page-body class */
-    background: red;
+    background: #69D2E7;
 }
 .name{
-    font: 60px arial;
+    font-size: 60px;
+    font-family: 'Inconsolata', serif;
 }
 .about{
-    font: 60px arial;
+    font-size: 60px;
+    font-family: 'Tangerine', serif;
     color: #ffffff;
 }
 .contact{
@@ -13,8 +15,17 @@
 .email{
 }
 .fb-banner{
-  padding: 5px 0;
-  margin: 10px 0;
-  background: #0000FF;
+  margin: 0;
+  padding: 5px 0 10px 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  font-size: 30px;
+  font-family: 'Reenie Beanie', serif;
+  background: #DAE02F;
 }
-
+.fb-banner .contact{
+  float: left;
+}.fb-banner .login{
+  float: right;
+}
