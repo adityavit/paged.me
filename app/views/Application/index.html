@@ -2,13 +2,19 @@
 #{set title: user.name /}
 
 <div class="name">${user.name}</div>
-<div class="about">${user.aboutme}</div>
-<div class="contact">${user.contact}</div>
 <div class="resume">${user.email}</div>
+<div class="aboutme">${user.aboutme}</div>
+<div class="contact">${user.contact}</div>
 <div class="designs">${user.email}</div>
 
 <div class="settings">
 #{if uid && user && uid == user.fbuid }
+  <h3><a href="#">folio-new-palettes</a></h3>
+  <div class="foliostyle-palettes">
+    <ul>
+      <li></li>
+    </ul>
+  </div>
   <h3><a href="#">folio-style</a></h3>
   <div class="foliostyle-form">
     #{form @Application.addStyle(), id:'foliostyle'}
@@ -17,6 +23,9 @@
     <input type="text" name="elementValue" id="elementValue" value="${params.elementValue}"/>
     <input type="submit" value="submit" id='submit'/>
     #{/form}
+  </div>
+  <h3><a href="#">folio-palettes</a></h3>
+  <div class="foliostyle-palettes">
   </div>
   <h3><a href="#">folio-info</a></h3>
   <div class="folioinfo-form">
@@ -29,6 +38,11 @@
   </div>
 #{/if}
 </div>
+
+<form>
+  <input type="text" id="color" name="color" value="#123456" />
+</form>
+<div id="colorpicker"></div>
 
 <script type="text/javascript">
   $(function() {
@@ -50,5 +64,9 @@
     });
     $("div.settings").accordion();
     $("div.settings").draggable();
+    $('#colorpicker').farbtastic('#color');
+    $("div.name,div.aboutme,div.contact,div.resume,div.designs,div.resume").click(function(el){
+      alert("clicked " + $(this).attr("class"));
+    });
   });
 </script>

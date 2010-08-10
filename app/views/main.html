@@ -8,7 +8,10 @@
     #{press.stylesheet 'reset.css' /}
     #{press.stylesheet 'text.css' /}
     #{press.stylesheet 'main.css' /}
+    <!--- colorpicker : only for the edit mode edition. -->
+    #{press.stylesheet 'farbtastic.css' /}
     #{press.compressed-stylesheet /}
+
     <!--- need to fix this. --->
     <style type="text/css">#{if style}${style.value}#{/if}</style>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
@@ -18,6 +21,7 @@
     #{doLayout /}
     <div id="fb-root"></div>
     <script src="http://connect.facebook.net/en_US/all.js"></script>
+    #{press.script 'farbtastic.js' /}
     #{press.script 'main.js' /}
     #{press.compressed-script /}
     <script type="text/javascript">
