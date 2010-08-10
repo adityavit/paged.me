@@ -69,10 +69,7 @@ public class Application extends Controller {
 
 		while (matcher.find()) {
 			matched = matcher.group();
-			matched = matched.replaceAll(element
-					+ ":(#([a-f0-9]{6}|[a-f0-9]{3})|([0-9a-z]|-)*)", element
-					+ ":" + elementValue);
-
+			matched = matched.replaceAll(element + ":(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|([0-9a-zA-Z]|-)*)", element + ":" + elementValue);
 			style.value = matcher.replaceAll(matched);
 			style.save();
 		}

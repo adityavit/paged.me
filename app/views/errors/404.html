@@ -8,11 +8,9 @@
 		#{if play.mode.name() == 'DEV'}
 			#{404 result /}
 		#{/if}
-        #{else}
-        	<h1>Not found</h1>
-			<p>
-				${result.message}
-			</p>
-        #{/else}
+    #{else}
+    <h1>Not found</h1>
+    <p>${result.message}</p>
+    #{/else}
     </body>
 </html>
