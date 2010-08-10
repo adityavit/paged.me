@@ -1,100 +1,116 @@
-.body{ /* the page-body class */
+.body { /* the page-body class */
     background: #69D2E7;
     overflow: hidden;
 }
-.name{
+
+.name {
     font-size: 60px;
     font-family: 'Inconsolata', serif;
 }
-.about{
+
+.about {
     font-size: 60px;
     font-family: 'Tangerine', serif;
     color: #ffffff;
 }
-.contact{
+
+.contact {
     font-size: 20px;
     font-family: 'Reenie Beanie', serif;
     color: #ffffff;
 }
-.email{
+
+.email {
     font-size: 20px;
     font-family: 'Reenie Beanie', serif;
     color: #ffffff;
 }
-.editmode{
-  display:none;
+
+.editmode {
+    display: none;
 }
-.fb-banner{
-  margin: 0;
-  padding: 5px 0 10px 0;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  font-size: 30px;
-  font-family: 'Reenie Beanie', serif;
-  background: #DAE02F;
+
+.fb-banner {
+    margin: 0;
+    padding: 5px 0 10px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    font-size: 30px;
+    font-family: 'Reenie Beanie', serif;
+    background: #DAE02F;
 }
-.fb-banner .contact{
-  float: left;
-}.fb-banner .login{
-  float: right;
+
+.fb-banner .contact {
+    float: left;
 }
-.folio{
-  margin: 20px 0 10px 0;
-  padding: 10px 0;
-  width: 100%;
-  font-size: 30px;
-  font-family: 'Droid Sans', serif;
-  background: #EFFAB4;
+
+.fb-banner .login {
+    float: right;
 }
-.settings{
-  width: 300px;
-  opacity: 0.7;
-  padding: 10px;
-  top: 100px;
-  right: 100px;
-  position: absolute;
-  background: #000000;
-  cursor: move;
+
+.folio {
+    margin: 20px 0 10px 0;
+    padding: 10px 0;
+    width: 100%;
+    font-size: 30px;
+    font-family: 'Droid Sans', serif;
+    background: #EFFAB4;
 }
-.settings h3 a{
-  color: #ffffff;
-  font-size: 15px;
-  font-family: 'IM Fell DW Pica', serif;
-  text-decoration: none;
-  text-transform: uppercase;
-  text-shadow: 3px 3px 3 #ffffff;
+
+.settings {
+    width: 300px;
+    opacity: 0.7;
+    padding: 10px;
+    top: 100px;
+    right: 100px;
+    position: absolute;
+    background: #000000;
+    cursor: move;
 }
-.settings h3 a:hover{
-  opacity: 0.6;
-  color: #000000;
-  background: #ffffff;
+
+.settings h3 a {
+    color: #ffffff;
+    font-size: 15px;
+    font-family: 'IM Fell DW Pica', serif;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-shadow: 3px 3px 3 #ffffff;
 }
-input[type=text]{
-  padding: 5px;
-  width: 200px;
-  border: 1px #e0e0e0 solid;
+
+.settings h3 a:hover {
+    opacity: 0.6;
+    color: #000000;
+    background: #ffffff;
 }
-textarea{
-  margin: 2px 0;
-  padding: 5px;
-  border: 1px #e0e0e0 solid;
+
+input[type = text] {
+    padding: 5px;
+    width: 200px;
+    border: 1px #e0e0e0 solid;
 }
-.hide, .error{
-  display:none;
+
+textarea {
+    margin: 2px 0;
+    padding: 5px;
+    border: 1px #e0e0e0 solid;
 }
-.my-folio{
-  height: 150px;
+
+.hide, .error {
+    display: none;
 }
+
+.my-folio {
+    height: 150px;
+}
+
 form#folioinfo input, form#folioinfo textarea {
-  display:none;
+    display: none;
 }
-form#folioinfo div.aboutme textarea.aboutme,
-form#folioinfo div.name input.name,
-form#folioinfo div.email input.email,
-form#folioinfo div.contact input.contact{
-  font-size: 15px;
-  color: #000000;
-  background: #ffffff;
-  display:block;
+
+form#folioinfo div.aboutme textarea.aboutme, form#folioinfo div.name input.name, form#folioinfo div.email input.email, form#folioinfo div.contact input.contact {
+    font-size: 15px;
+    color: #000000;
+    background: #ffffff;
+    display: block;
 }
