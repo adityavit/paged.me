@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import models.Style;
 import models.User;
+import play.data.validation.Required;
 import play.mvc.Before;
 import play.mvc.Controller;
 
@@ -32,16 +33,19 @@ public class Application extends Controller {
 		// get the subdomain, requested for.
 		String sbdomain[] = request.domain.split("\\.");
 
+		User user = User.find("byFolioname", sbdomain[0]).first();
+		if (user == null && !FB_COOKIE_MAP.isEmpty()) {
+			user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
+		}
+		
+		Style style = Style.find("byField", sbdomain[0]).first();
+		
 		// @todo fix this nasty check.
 		if (sbdomain.length == 2 || sbdomain[0].equals("www")) {
-			render("Application/welcome.html");
+			render("Application/welcome.html", user);
 		} else {
-			User user = User.find("byName", sbdomain[0]).first();
-			Style style = Style.find("byField", sbdomain[0]).first();
-
 			// user null check; throw 404.
 			notFoundIfNull(user);
-
 			// user found, render the page.
 			render(user, style);
 		}
@@ -73,6 +77,14 @@ public class Application extends Controller {
 			style.save();
 		}
 		renderJSON(style);
+	}
+	
+	public static void addfolio(@Required String fbuid, @Required String folioname) {
+		//@todo validation.
+		
+		User user = new User(fbuid, folioname);
+		user.save();
+		renderJSON(user);
 	}
 
 	public static void emailer() {

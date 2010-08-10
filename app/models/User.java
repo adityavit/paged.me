@@ -33,7 +33,7 @@ public class User extends Model {
 	@Required
 	public String contact;
 
-	public User(String folioname, String fbuid) {
+	public User(String fbuid, String folioname) {
 		this.fbuid= fbuid;
 		this.folioname = folioname;
 	}
@@ -43,10 +43,6 @@ public class User extends Model {
 		this.email = email;
 		this.aboutme = aboutme;
 		this.contact = contact;
-	}
-	
-	public static User connect(String email, String password) {
-		return find("byEmailAndPassword", email, password).first();
 	}
 	
 	public String toString(){

@@ -14,6 +14,9 @@
 }
 .email{
 }
+.hide, .error{
+  display:none;
+}
 .fb-banner{
   margin: 0;
   padding: 5px 0 10px 0;
@@ -28,4 +31,12 @@
   float: left;
 }.fb-banner .login{
   float: right;
+}
+.folio{
+  margin: 20px 0 10px 0;
+  padding: 10px 0;
+  width: 100%;
+  font-size: 30px;
+  font-family: 'Droid Sans', serif;
+  background: #EFFAB4;
 }

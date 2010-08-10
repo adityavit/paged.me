@@ -3,7 +3,7 @@
     
 User(phoenix24):
     isAdmin:    true
-    name:       phoenix24
+    folioname:  phoenix24
     email:      phoenix24@gmail.com
     password:   secret
     contact:    contact
@@ -12,7 +12,7 @@ User(phoenix24):
                 yesh! honey! :D
 
 User(bluebat):
-    name:       bluebat
+    folioname:  bluebat
     email:      bluebat@gmail.com
     password:   secret
     contact:    contact
@@ -21,22 +21,13 @@ User(bluebat):
                 yesh ofcourse!! i fight the bad guys.
 
 User(bobthecat):
-    name:       bobthecat
+    folioname:  bobthecat
     email:      bobthecat@gmail.com
     password:   secret
     contact:    contact
     aboutme:    
                 i am a blue bat!
                 how wierd do you think i could ever be ?
-
-User(crazyduck):
-    name:       crazyduck
-    email:      crazyduck@gmail.com
-    password:   secret
-    contact:    contact
-    aboutme:    
-                you know me, the duck who made you sing!
-                and, don't listen to those creeps calling names.
 
 Style(phoenix24):
     field:      phoenix24
