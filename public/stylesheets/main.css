@@ -114,3 +114,10 @@ form#folioinfo div.aboutme textarea.aboutme, form#folioinfo div.name input.name,
     background: #ffffff;
     display: block;
 }
+.style-controls li {
+  float: left;
+  padding: 3px 5px 3px 0;
+}
+.style-controls a {
+  color: #ffffff;
+}

@@ -73,9 +73,12 @@ public class Application extends Controller {
 
 		Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(css);
-
+		
 		while (matcher.find()) {
 			matched = matcher.group();
+			if (!matched.contains(element)){
+				matched = matched.substring(0, matched.length() - 1) + element + ":" + elementValue + ";}";
+			}
 			matched = matched.replaceAll(element
 					+ ":(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|([0-9a-zA-Z]|-)*)",
 					element + ":" + elementValue);

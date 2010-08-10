@@ -7,8 +7,8 @@
   <div class="contact">${user.contact}</div>
 </div>
 
-<div class="settings">
 #{if uid && user && uid == user.fbuid }
+<div class="settings">
   <h3><a href="#">my folio</a></h3>
   <div class="my-folio">
     #{form @Application.addinfo(), id:'folioinfo', class:'name'}
@@ -20,27 +20,29 @@
     </div>
     #{/form}
     
-    <div id="foliostyle-form">
-      #{form @Application.addStyle(), id:'foliostyle'}
-      <input type="hidden" name="value" id="value" value="${params.value}"/>
-      <input type="text" name="element" id="element" value="${params.element}"/>
-      <input type="text" name="elementValue" id="elementValue" value="${params.elementValue}"/>
-      <input type="submit" value="submit"/>
-      #{/form}
+    <div class="style-controls">
+      <ul>
+        <li><a class="ffamily" field="font-family" href="#">ffamily</a></li>
+        <li><a class="fsize" field="font-size" href="#">fsize</a></li>
+        <li><a class="fcolor" field="color" href="#">fcolor</a></li>
+        <li><a class="fbg" field="background" href="#">fbg</a></li>
+      </ul>
     </div>
+    #{form @Application.addStyle(), id:'foliostyle'}
+    <div id="foliostyle-form">
+    <input type="hidden" name="value" id="value" value="${params.value}"/>
+    <input type="hidden" name="element" id="element" value="${params.element}"/>
+    <input type="text" name="elementValue" id="elementValue" value="${params.elementValue}"/>
+    <input type="submit" value="submit"/>
+    </div>
+    #{/form}
   </div>
   <h3><a href="#">folio-palettes</a></h3>
   <div class="folio-palettes"></div>
-#{/if}
 </div>
-
-<form>
-  <input type="text" id="color" name="color" value="#123456" />
-</form>
+<form><input type="text" id="color" name="color" value="#123456" /></form>>
 <div id="colorpicker"></div>
-<div class="fb-banner editmode">
-  <span>changed saved successfuly.</span>
-</div>
+<div class="fb-banner editmode"><span>changed saved successfuly.</span></div>
 
 <script type="text/javascript">
   $(function() {
@@ -75,9 +77,15 @@
       $("form#foliostyle #element").val("font-size");
       $("form#foliostyle #elementValue").val($(this).css("font-size"));
     });
-    
+    $("div.style-controls li a").live('click', function(el){
+      console.log("clicked : " + ", " + "div.folio-container ." +$("form#foliostyle #value").val() + " " + $(this).attr("field") + ":" + $("div.folio-container ." +$("form#foliostyle #value").val()).css($(this).attr("field")));
+      
+      $("form#foliostyle #element").val($(this).attr("field"));
+      $("form#foliostyle #elementValue").val($("div.folio-container ." +$("form#foliostyle #value").val()).css($(this).attr("field")));
+    });
     $("div.settings").accordion();
     $("div.settings").draggable({ containment: 'window' });
     $("#colorpicker").farbtastic('#color');
   });
 </script>
+#{/if}
