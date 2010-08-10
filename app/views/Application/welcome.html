@@ -9,9 +9,8 @@
   #{if uid}
   <li class="folio-form #{if user }hide#{/if}">
   #{form @Application.addfolio(), id:'createfolio'}
-    <p class="error">all fields are required.</p>
+    <p class="error">folioname iiis required.</p>
     <p>
-      <input type="text" id="fbuid" name="fbuid" value="${uid}"/>
       <input type="text" id="folioname" name="folioname" value="${params.folioname}"/>
       <input type="submit"/>
     </p>

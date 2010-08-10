@@ -32,10 +32,14 @@ public class User extends Model {
 	// now this must be an address object of its own.
 	@Required
 	public String contact;
-
+	
 	public User(String fbuid, String folioname) {
 		this.fbuid= fbuid;
 		this.folioname = folioname;
+		this.name = "NO NAME.";
+		this.email = "NO EMAIL.";
+		this.aboutme = "NOPE NOTHING.";
+		this.contact = "NOPE NOT REACHABLE.";
 	}
 	
 	public User(String name, String email, String aboutme, String contact) {

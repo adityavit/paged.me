@@ -85,22 +85,22 @@ public class Application extends Controller {
 		renderJSON(style);
 	}
 
-	public static void addinfo(String aboutme, String contact, String email) {
+	public static void addinfo(String name, String aboutme, String contact, String email) {
 		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
+		user.name = name;
+		user.email = email;
 		user.aboutme = aboutme;
 		user.contact = contact;
-		user.email = email;
 		user.save();
 
 		renderJSON("");
 	}
 
-	public static void addfolio(@Required String fbuid,
-			@Required String folioname) {
+	public static void addfolio(@Required String folioname) {
 		// @todo validation.
-
-		User user = new User(fbuid, folioname);
+		User user = new User(FB_COOKIE_MAP.get("uid"), folioname);
 		user.save();
+		
 		renderJSON(user);
 	}
 

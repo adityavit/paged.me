@@ -2,21 +2,23 @@
 #{set title: user.name /}
 
 <div class="name">${user.name}</div>
-<div class="resume">${user.email}</div>
+<div class="email">${user.email}</div>
 <div class="aboutme">${user.aboutme}</div>
 <div class="contact">${user.contact}</div>
-<div class="designs">${user.email}</div>
 
 <div class="settings">
 #{if uid && user && uid == user.fbuid }
-  <h3><a href="#">folio-new-palettes</a></h3>
-  <div class="foliostyle-palettes">
-    <ul>
-      <li></li>
-    </ul>
-  </div>
-  <h3><a href="#">folio-style</a></h3>
-  <div class="foliostyle-form">
+  <h3><a href="#">my folio</a></h3>
+  <div class="my-folio">
+    #{form @Application.addinfo(), id:'folioinfo', class:'name'}
+    <div id="folioinfo-form">
+    <input class="name" type="text" name="name" value="${user.name}"/>
+    <input class="email" type="text" name="email" value="${user.email}"/>
+    <input class="contact" type="text" name="contact" value="${user.contact}"/>
+    <textarea class="aboutme" name="aboutme">${user.aboutme}</textarea>
+    <input type="submit" value="submit" id='submit'/>
+    </div>
+    #{/form}
     #{form @Application.addStyle(), id:'foliostyle'}
     <input type="text" name="value" id="value" value="${params.value}"/>
     <input type="text" name="element" id="element" value="${params.element}"/>
@@ -25,17 +27,7 @@
     #{/form}
   </div>
   <h3><a href="#">folio-palettes</a></h3>
-  <div class="foliostyle-palettes">
-  </div>
-  <h3><a href="#">folio-info</a></h3>
-  <div class="folioinfo-form">
-    #{form @Application.addinfo(), id:'folioinfo'}
-    <input type="text" name="email" value="${user.email}"/>
-    <input type="text" name="contact" value="${user.contact}"/>
-    <textarea name="aboutme">${user.aboutme}</textarea>
-    <input type="submit" value="submit" id='submit'/>
-    #{/form}
-  </div>
+  <div class="folio-palettes"></div>
 #{/if}
 </div>
 
@@ -64,9 +56,9 @@
     });
     $("div.settings").accordion();
     $("div.settings").draggable();
-    $('#colorpicker').farbtastic('#color');
-    $("div.name,div.aboutme,div.contact,div.resume,div.designs,div.resume").click(function(el){
-      alert("clicked " + $(this).attr("class"));
+    $("#colorpicker").farbtastic('#color');
+    $("div.name,div.email,div.aboutme,div.contact").click(function(el){
+      $("form#folioinfo div").removeClass().addClass($(this).attr("class"));
     });
   });
 </script>
