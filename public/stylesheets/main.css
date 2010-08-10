@@ -48,6 +48,7 @@
   right: 100px;
   position: absolute;
   background: #000000;
+  cursor: move;
 }
 .settings h3 a{
   color: #ffffff;
