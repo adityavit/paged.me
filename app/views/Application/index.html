@@ -13,17 +13,21 @@
   <div class="my-folio">
     #{form @Application.addinfo(), id:'folioinfo', class:'name'}
     <div id="folioinfo-form">
-    <input class="name" type="text" name="name" value="${user.name}"/>
-    <input class="email" type="text" name="email" value="${user.email}"/>
-    <input class="contact" type="text" name="contact" value="${user.contact}"/>
-    <textarea class="aboutme" name="aboutme">${user.aboutme}</textarea>
+      <input class="name" type="text" name="name" value="${user.name}"/>
+      <input class="email" type="text" name="email" value="${user.email}"/>
+      <input class="contact" type="text" name="contact" value="${user.contact}"/>
+      <textarea class="aboutme" name="aboutme">${user.aboutme}</textarea>
     </div>
     #{/form}
-    #{form @Application.addStyle(), id:'foliostyle'}
-    <input type="text" name="value" id="value" value="${params.value}"/>
-    <input type="text" name="element" id="element" value="${params.element}"/>
-    <input type="text" name="elementValue" id="elementValue" value="${params.elementValue}"/>
-    #{/form}
+    
+    <div id="foliostyle-form">
+      #{form @Application.addStyle(), id:'foliostyle'}
+      <input type="hidden" name="value" id="value" value="${params.value}"/>
+      <input type="text" name="element" id="element" value="${params.element}"/>
+      <input type="text" name="elementValue" id="elementValue" value="${params.elementValue}"/>
+      <input type="submit" value="submit"/>
+      #{/form}
+    </div>
   </div>
   <h3><a href="#">folio-palettes</a></h3>
   <div class="folio-palettes"></div>
@@ -34,32 +38,46 @@
   <input type="text" id="color" name="color" value="#123456" />
 </form>
 <div id="colorpicker"></div>
+<div class="fb-banner editmode">
+  <span>changed saved successfuly.</span>
+</div>
 
 <script type="text/javascript">
   $(function() {
-    $("#foliostyle").submit(function(){
-      $.post('@{Application.addStyle()}', $("#foliostyle").serialize(), function(style){
-        $(":input", "#foliostyle").not(":submit").not("#field:text").val("");
+    
+    $("form#foliostyle").submit(function(){
+      $.post('@{Application.addStyle()}', $("form#foliostyle").serialize(), function(style){
         $("style").text(style.value);
-//        window.location.reload();
+        $(".editmode").fadeIn(3000).delay(1000).fadeOut(3000);
       }, 'json');
       return false;
     });
-    $("#folioinfo").submit(function(){
+    
+    $("form#folioinfo").submit(function(){
       $.post('@{Application.addinfo()}', $("#folioinfo").serialize(), function(style){
-//        window.location.reload();
+        $(".editmode").fadeIn(2000).delay(1000).fadeOut(2000);
       }, 'json');
       return false;
     });
-    $("div.settings").accordion();
-    $("div.settings").draggable();
-    $("#colorpicker").farbtastic('#color');
+    
+    $("form#foliostyle input").live('change', function(el){
+      $("div.folio-container div."+$("form#foliostyle #value").val()).css($("form#foliostyle #element").val(), $("form#foliostyle #elementValue").val());
+      $("form#foliostyle").submit();
+    });
+    
     $("form#folioinfo input,form#folioinfo textarea").live('keydown', function(el){
       $("div.folio-container div."+$(this).attr("class")).text($(this).val());
       $("form#folioinfo").submit();
     });
     $("div.name,div.email,div.aboutme,div.contact").click(function(el){
       $("form#folioinfo div").removeClass().addClass($(this).attr("class"));
+      $("form#foliostyle #value").val($(this).attr("class"));
+      $("form#foliostyle #element").val("font-size");
+      $("form#foliostyle #elementValue").val($(this).css("font-size"));
     });
+    
+    $("div.settings").accordion();
+    $("div.settings").draggable({ containment: 'window' });
+    $("#colorpicker").farbtastic('#color');
   });
 </script>

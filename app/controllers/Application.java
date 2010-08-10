@@ -84,6 +84,18 @@ public class Application extends Controller {
 		}
 		renderJSON(style);
 	}
+	
+	public static void updateStyle(String cssstyle){
+		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
+		// user null check; throw 404.
+		notFoundIfNull(user);
+
+		// need a better check here.
+		Style style = Style.find("byField", user.folioname).first();
+		style.value = cssstyle.toLowerCase();
+		style.save();
+		renderJSON(style);
+	}
 
 	public static void addinfo(String name, String aboutme, String contact, String email) {
 		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
