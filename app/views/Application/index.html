@@ -7,26 +7,30 @@
 <div class="resume">${user.email}</div>
 <div class="designs">${user.email}</div>
 
+<div class="settings">
 #{if uid && user && uid == user.fbuid }
-  #{form @Application.addStyle(), id:'foliostyle'}
-  <p>
+  <h3><a href="#">folio-style</a></h3>
+  <div class="foliostyle-form">
+    #{form @Application.addStyle(), id:'foliostyle'}
     <input type="text" name="value" id="value" value="${params.value}"/>
     <input type="text" name="element" id="element" value="${params.element}"/>
     <input type="text" name="elementValue" id="elementValue" value="${params.elementValue}"/>
     <input type="submit" value="submit" id='submit'/>
-  </p>
-  #{/form}
-  #{form @Application.addinfo(), id:'folioinfo'}
-  <p>
-    <input type="text" name="aboutme" value="${user.aboutme}"/>
-    <input type="text" name="contact" value="${user.contact}"/>
+    #{/form}
+  </div>
+  <h3><a href="#">folio-info</a></h3>
+  <div class="folioinfo-form">
+    #{form @Application.addinfo(), id:'folioinfo'}
     <input type="text" name="email" value="${user.email}"/>
+    <input type="text" name="contact" value="${user.contact}"/>
+    <textarea name="aboutme">${user.aboutme}</textarea>
     <input type="submit" value="submit" id='submit'/>
-  </p>
-  #{/form}
+    #{/form}
+  </div>
 #{/if}
-<ul></ul>
-<script type="text/javascript" charset="utf-8">
+</div>
+
+<script type="text/javascript">
   $(function() {
     $("#foliostyle").submit(function(){
       $.post('@{Application.addStyle()}', $("#foliostyle").serialize(), function(style){
@@ -44,5 +48,7 @@
       }, 'json');
       return false;
     });
+    $("div.settings").accordion();
+    $("div.settings").draggable();
   });
 </script>
