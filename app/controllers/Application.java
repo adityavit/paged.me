@@ -20,7 +20,8 @@ public class Application extends Controller {
 	public static void FBValidation() {
 		String fbcookies[], val[];
 		if (request.cookies.containsKey(FB_COOKIE)) {
-			fbcookies = request.cookies.get(FB_COOKIE).value.replace("\"", "").split("&");
+			fbcookies = request.cookies.get(FB_COOKIE).value.replace("\"", "")
+					.split("&");
 			for (String arg : fbcookies) {
 				val = arg.split("=");
 				FB_COOKIE_MAP.put(val[0], val[1]);
@@ -37,9 +38,9 @@ public class Application extends Controller {
 		if (user == null && !FB_COOKIE_MAP.isEmpty()) {
 			user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
 		}
-		
+
 		Style style = Style.find("byField", sbdomain[0]).first();
-		
+
 		// @todo fix this nasty check.
 		if (sbdomain.length == 2 || sbdomain[0].equals("www")) {
 			render("Application/welcome.html", user);
@@ -51,34 +52,49 @@ public class Application extends Controller {
 		}
 	}
 
-	public static void addStyle(String field, String value, String element,
+	public static void addStyle(String value, String element,
 			String elementValue) {
 		if (validation.hasErrors()) {
 			render("Application/index.html");
 		}
+		String matched = "";
 		String regex = "."
 				+ value
 				+ "(\\{(([a-z]|-)*:(#([a-f0-9]{6}|[a-f0-9]{3})|([0-9a-z]|-)*);?)*?\\})";
 
-		Style style = Style.find("byField", field).first();
-		String css = style.value;
-		String matched = "";
+		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
+		// user null check; throw 404.
+		notFoundIfNull(user);
+
+		// need a better check here.
+		Style style = Style.find("byField", user.folioname).first();
+		String css = style.value.toLowerCase();
 
 		Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(css);
 
 		while (matcher.find()) {
 			matched = matcher.group();
-			matched = matched.replaceAll(element + ":(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|([0-9a-zA-Z]|-)*)", element + ":" + elementValue);
+			matched = matched.replaceAll(element
+					+ ":(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|([0-9a-zA-Z]|-)*)",
+					element + ":" + elementValue);
 			style.value = matcher.replaceAll(matched);
 			style.save();
 		}
 		renderJSON(style);
 	}
-	
-	public static void addfolio(@Required String fbuid, @Required String folioname) {
-		//@todo validation.
-		
+
+	public static void addinfo(String aboutme, String contact, String email) {
+		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
+		Style style = Style.find("byField", user.folioname).first();
+
+		renderJSON("");
+	}
+
+	public static void addfolio(@Required String fbuid,
+			@Required String folioname) {
+		// @todo validation.
+
 		User user = new User(fbuid, folioname);
 		user.save();
 		renderJSON(user);

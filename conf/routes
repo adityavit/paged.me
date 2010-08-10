@@ -4,6 +4,7 @@
 
 # Home page
 GET     /                                       Application.index
+POST    /addinfo                                Application.info
 POST    /addfolio                               Application.addfolio
 POST    /addstyle                               Application.addStyle
 

@@ -8,32 +8,28 @@
 <div class="designs">${user.email}</div>
 
 #{if uid && user && uid == user.fbuid }
-  #{form @Application.addStyle(), id:'form1'}
+  #{form @Application.addStyle(), id:'foliostyle'}
   #{ifErrors}
     <p class="error">all fields are required.</p>
   #{/ifErrors}
   <p>
-    <input type="text" name="field" id="field" value="${user.folioname}" />
     <input type="text" name="value" id="value" value="${params.value}"/>
     <input type="text" name="element" id="element" value="${params.element}"/>
     <input type="text" name="elementValue" id="elementValue" value="${params.elementValue}"/>
     <input type="submit" value="submit" id='submit'/>
   </p>
   #{/form}
-  <div id="posted" class="posted"></div>
 #{/if}
 <ul></ul>
 <script type="text/javascript" charset="utf-8">
   $(function() {
-    $("#form1").submit(function(){
-      $.post('@{Application.addStyle()}', $("#form1").serialize(), function(style){
-        $(":input", "#form1").not(":submit").val("");
-//        $("ul").prepend('<li>' + style.field + '  :  '+ style.value + '</li>');
-//        $("style").text(style.value);
-//        $("#posted").html("successfully posted!" + style.field + ", " + style.value);
-          window.location.reload();
+    $("#foliostyle").submit(function(){
+      $.post('@{Application.addStyle()}', $("#foliostyle").serialize(), function(style){
+        $(":input", "#foliostyle").not(":submit").not("#field:text").val("");
+        $("style").text(style.value);
+//        window.location.reload();
       }, 'json');
-//      $("#form1")[0].reset();
+//      $("#foliostyle")[0].reset();
       return false;
     });
   });
