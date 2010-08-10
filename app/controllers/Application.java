@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import models.Style;
 import models.User;
+import play.data.validation.Email;
 import play.data.validation.Required;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -86,7 +87,10 @@ public class Application extends Controller {
 
 	public static void addinfo(String aboutme, String contact, String email) {
 		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
-		Style style = Style.find("byField", user.folioname).first();
+		user.aboutme = aboutme;
+		user.contact = contact;
+		user.email = email;
+		user.save();
 
 		renderJSON("");
 	}

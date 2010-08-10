@@ -9,13 +9,18 @@
 
 #{if uid && user && uid == user.fbuid }
   #{form @Application.addStyle(), id:'foliostyle'}
-  #{ifErrors}
-    <p class="error">all fields are required.</p>
-  #{/ifErrors}
   <p>
     <input type="text" name="value" id="value" value="${params.value}"/>
     <input type="text" name="element" id="element" value="${params.element}"/>
     <input type="text" name="elementValue" id="elementValue" value="${params.elementValue}"/>
+    <input type="submit" value="submit" id='submit'/>
+  </p>
+  #{/form}
+  #{form @Application.addinfo(), id:'folioinfo'}
+  <p>
+    <input type="text" name="aboutme" value="${user.aboutme}"/>
+    <input type="text" name="contact" value="${user.contact}"/>
+    <input type="text" name="email" value="${user.email}"/>
     <input type="submit" value="submit" id='submit'/>
   </p>
   #{/form}
@@ -29,7 +34,14 @@
         $("style").text(style.value);
 //        window.location.reload();
       }, 'json');
-//      $("#foliostyle")[0].reset();
+      return false;
+    });
+    $("#folioinfo").submit(function(){
+      $.post('@{Application.addinfo()}', $("#folioinfo").serialize(), function(style){
+//        $(":input", "#folioinfo").not(":submit").not("#field:text").val("");
+//        $("style").text(style.value);
+        window.location.reload();
+      }, 'json');
       return false;
     });
   });

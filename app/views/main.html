@@ -1,17 +1,35 @@
-<!DOCTYPE html>
-
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-    <head>
-        <title>#{get 'title' /}</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}">
-        <style type="text/css">
-            ${style.value}
-        </style>
-        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-        <script src="@{'/public/javascripts/jquery-1.4.2.min.js'}" type="text/javascript" charset="utf-8"></script>
-    </head>
-    <body class="body">
-        #{doLayout /}
-    </body>
+  <head>
+    <title>#{get 'title' /}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine|Inconsolata|Droid+Sans|Reenie+Beanie">
+    #{press.stylesheet 'reset.css' /}
+    #{press.stylesheet 'text.css' /}
+    #{press.stylesheet 'main.css' /}
+    #{press.compressed-stylesheet /}
+    <!--- need to fix this. --->
+    <style type="text/css">#{if style}${style.value}#{/if}</style>
+  </head>
+  <body class="body #{get 'bodycss' /}">
+    #{doLayout /}
+    <div id="fb-root"></div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    #{press.script 'main.js' /}
+    #{press.compressed-script /}
+    <script type="text/javascript">
+    FB.init({appId: '121671684547934', status: true, cookie: true, xfbml: true});
+    FB.Event.subscribe('auth.sessionChange', function(response) {
+      if (response.session) {
+        window.location.reload();
+        // A user has logged in, and a new cookie has been saved
+      } else {
+        // The user has logged out, and the cookie has been cleared
+      }
+    });
+    </script>
+  </body>
 </html>

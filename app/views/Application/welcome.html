@@ -1,81 +1,46 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
-  <head>
-    <title>paged me!</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    #{press.stylesheet 'reset.css' /}
-    #{press.stylesheet 'text.css' /}
-    #{press.stylesheet '960_24_col.css' /}
-    #{press.stylesheet 'main.css' /}
-    #{press.compressed-stylesheet /}
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine|Inconsolata|Droid+Sans|Reenie+Beanie">
-    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-  </head>
-  <body class="container_24 body">
-    <div class="name">Amigo!</div>
-    <div class="about">this looks like a nice portfolio destination :D</div>
-    <div class="folio">
-      <ul>
-      #{if uid}
-      <li class="folio-form #{if user }hide#{/if}">
-      #{form @Application.addfolio(), id:'form2'}
-        <p class="error">all fields are required.</p>
-        <p>
-          <input type="text" id="fbuid" name="fbuid" value="${uid}"/>
-          <input type="text" id="folioname" name="folioname" value="${params.folioname}"/>
-          <input type="submit"/>
-        </p>
-      #{/form}
-      </li>
-      <li class="folio-name #{if !user }hide#{/if}">
-        #{if user }
-        <a href="http://${user.folioname}.tst.it">${user.folioname}.tst.it</a><span>, ah! your folio!</span>
-        #{/if}
-      </li>
-      #{/if}
-      </ul>
-    </div>
-    <div class="fb-banner">
-      <div class="contact"><a href="https://graph.facebook.com/oauth/authorize?client_id=121671684547934&redirect_uri=http://tst.it/&type=user_agent&display=page&scope=user_photos,user_videos,publish_stream,email,user_about_me,user_birthday">go ahead, etch one for yourself</a></div>
-    #{if !uid }
-      <div class="login"><fb:login-button perms="email,user_birthday"></fb:login-button></div>
+#{extends 'main.html' /}
+#{set title: 'paged.me!' /}
+#{set bodycss: 'container_24' /}
+
+<div class="name">Amigo!</div>
+<div class="about">this looks like a nice portfolio destination :D</div>
+<div class="folio">
+  <ul>
+  #{if uid}
+  <li class="folio-form #{if user }hide#{/if}">
+  #{form @Application.addfolio(), id:'createfolio'}
+    <p class="error">all fields are required.</p>
+    <p>
+      <input type="text" id="fbuid" name="fbuid" value="${uid}"/>
+      <input type="text" id="folioname" name="folioname" value="${params.folioname}"/>
+      <input type="submit"/>
+    </p>
+  #{/form}
+  </li>
+  <li class="folio-name #{if !user }hide#{/if}">
+    #{if user }
+    <a href="http://${user.folioname}.tst.it">${user.folioname}.tst.it</a><span>, ah! your folio!</span>
     #{/if}
-    </div>
-    
-    <div id="fb-root"></div>
-    <script src="@{'/public/javascripts/jquery-1.4.2.min.js'}" type="text/javascript" charset="utf-8"></script>
-    <script src="http://connect.facebook.net/en_US/all.js"></script>
-    #{press.script 'main.js' /}
-    #{press.compressed-script /}
-    <script>
-    FB.init({appId: '121671684547934', status: true, cookie: true, xfbml: true});
-    FB.Event.subscribe('auth.sessionChange', function(response) {
-      if (response.session) {
-        window.location.reload();
-        // A user has logged in, and a new cookie has been saved
-      } else {
-        // The user has logged out, and the cookie has been cleared
-      }
-    });
-    $(function(){
-      $("#form1").submit(function(){
-        $.post('@{addStyle()}', $("#form1").serialize(), function(style){
-          $(":input", "#form1").not(":submit").val("");
-          $("ul").prepend('<li>' + style.field + '  :  ' + style.value + '</li>');
-//          $("#posted").html("successfully posted!" + style.field + ", " + style.value);
-        }, 'json');
-//        $("#form1")[0].reset();
-        return false;
-      });
-      $("#form2").submit(function(){
-        $.post('@{addfolio()}', $("#form2").serialize(), function(folio){
-          $("ul li.folio-name").append('<a href="http://' + folio.folioname + '.tst.it">' + folio.folioname + '.tst.it</a><span>, ah! your folio!</span>');
-          $("li.folio-form").hide("slow");
-          $("li.folio-name").show("slow");
-        }, 'json');
-        return false;
-      });
-    });
-    </script>
-  </body>
-</html>
+  </li>
+  #{/if}
+  </ul>
+</div>
+<div class="fb-banner">
+  <div class="contact"><a href="https://graph.facebook.com/oauth/authorize?client_id=121671684547934&redirect_uri=http://tst.it/&type=user_agent&display=page&scope=user_photos,user_videos,publish_stream,email,user_about_me,user_birthday">go ahead, etch one for yourself</a></div>
+#{if !uid }
+  <div class="login"><fb:login-button perms="email,user_birthday"></fb:login-button></div>
+#{/if}
+</div>
+
+<script type="text/javascript">
+$(function(){
+  $("#createfolio").submit(function(){
+    $.post('@{addfolio()}', $("#createfolio").serialize(), function(folio){
+      $("ul li.folio-name").append('<a href="http://' + folio.folioname + '.tst.it">' + folio.folioname + '.tst.it</a><span>, ah! your folio!</span>');
+      $("li.folio-form").hide("slow");
+      $("li.folio-name").show("slow");
+    }, 'json');
+    return false;
+  });
+});
+</script>
