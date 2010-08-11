@@ -43,19 +43,20 @@
       }, 'json');
       return false;
     });
-//    $("form#foliostyle input").live('change', function(el){
-//      $("div.container div."+$("form#foliostyle #cname").val()).css($("form#foliostyle #cfield").val(), $("form#foliostyle #cvalue").val());
+//    $("inputinput").live('change', function(el){
+//      $("div.container div."+$("input#cname").val()).css($("input#cfield").val(), $("input#cvalue").val());
 //      $("form#foliostyle").submit();
 //    });
     $("div.controls li a").live('click', function(el){
-//      $("form#foliostyle #cname").val(field);
-//      $("form#foliostyle #cfield").val("font-size");
-//      $("form#foliostyle #cvalue").val($(this).css("font-size"));
+      var cname = $("input.fname").val();
+      var cfield = $(this).attr("field");
+      var cvalue = $("div.container").children("."+cname).css(cfield);
 
-//      $("form#foliostyle #cname").val($("div.container ." +$("form#foliostyle #cname").val()).css($(this).attr("field")));
-//      $("form#foliostyle #cfield").val($(this).attr("field"));
+      $("input#cname").val(cname);
+      $("input#cfield").val(cfield);
+      $("input#cvalue").val(cvalue);
 
-//      if($(this).attr("field") == "color" || $(this).attr("field") == "background" ){
+//      if(cfield == "color" || cfield == "background" ){
 //        $("div#colorpicker").show();
 //      } else {
 //        $("div#colorpicker").hide();
@@ -80,6 +81,13 @@
       var field = $(this).attr("class").replace("fld ", "");
       $("input.fvalue").val($(this).text());
       $("input.fname").val(field);
+      
+      var cname = $("input.fname").val();
+      var cfield = "font-family";
+      var cvalue = $("div.container").children("."+cname).css(cfield);
+      $("input#cname").val(cname);
+      $("input#cfield").val(cfield);
+      $("input#cvalue").val(cvalue);
     });
     $("div.settings").accordion();
     $("div.settings").draggable({ containment: 'window' });
