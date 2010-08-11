@@ -47,12 +47,13 @@
     }
     $("div.controls li a").live('click', function(el){
       //update styleform.
-      updateSF($(this).attr("field"));
-//      if(cfield == "color" || cfield == "background" ){
-//        $("div#colorpicker").show();
-//      } else {
-//        $("div#colorpicker").hide();
-//      }
+      var cfield = $(this).attr("field");
+      updateSF(cfield);
+      if(cfield == "color" || cfield == "background" ){
+        $("div#colorpicker").show();
+      } else {
+        $("div#colorpicker").hide();
+      }
     });
     
     $("form#foliostyle").submit(function(){
@@ -95,7 +96,7 @@
     });
     $("div.settings").accordion();
     $("div.settings").draggable({ containment: 'window' });
-//    $("#colorpicker").farbtastic('#cname');
+    $("#colorpicker").farbtastic('input#cvalue');
   });
 </script>
 #{/if}
