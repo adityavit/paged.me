@@ -35,18 +35,6 @@
 <div class="fb-banner editmode"><span>changed saved successfuly.</span></div>
 <script type="text/javascript">
   $(function() {
-    $("form#foliostyle").submit(function(){
-      $.post('@{Application.addStyle()}', $("form#foliostyle").serialize(), function(user){
-        $("style").text(user.style);
-        $(".editmode").fadeIn(3000).delay(1000).fadeOut(3000);
-      }, 'json');
-      return false;
-    });
-//    $("inputinput").live('change', function(el){
-//      $("div.container div."+$("input#cname").val()).css($("input#cfield").val(), $("input#cvalue").val());
-//      $("form#foliostyle").submit();
-//    });
-    
     var updateSF = function (cfield, cvalue, cname){
       //this might be source of bugs.
       //@todo, put strong checks here.
@@ -65,6 +53,21 @@
 //      } else {
 //        $("div#colorpicker").hide();
 //      }
+    });
+    
+    $("form#foliostyle").submit(function(){
+      $.post('@{Application.addStyle()}', $("form#foliostyle").serialize(), function(user){
+        $("style").text(user.style);
+        $(".editmode").fadeIn(3000).delay(1000).fadeOut(3000);
+      }, 'json');
+      return false;
+    });
+    $("input#cvalue").live('change', function(el){
+      var cname = "." + $("input#cname").val();
+      var cfield = $("input#cfield").val();
+      var cvalue = $("input#cvalue").val();
+      $("div.container").children(cname).css(cfield, cvalue);
+      $("form#foliostyle").submit();
     });
     
     $("form#folioinfo").submit(function(){
