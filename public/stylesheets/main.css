@@ -3,6 +3,11 @@
     overflow: hidden;
 }
 
+/*
+ .name, .about, .contact, .email {
+ position: absolute;
+ }
+ */
 .name {
     font-size: 60px;
     font-family: 'Inconsolata', serif;
@@ -101,7 +106,7 @@ textarea {
 }
 
 .my-folio {
-    height: 150px;
+    height: 300px;
 }
 
 form#folioinfo input, form#folioinfo textarea {
@@ -114,10 +119,16 @@ form#folioinfo div.aboutme textarea.aboutme, form#folioinfo div.name input.name,
     background: #ffffff;
     display: block;
 }
+
 .style-controls li {
-  float: left;
-  padding: 3px 5px 3px 0;
+    float: left;
+    padding: 3px 5px 3px 0;
 }
+
 .style-controls a {
-  color: #ffffff;
+    color: #ffffff;
+}
+
+#colorpicker {
+    display: none;
 }
