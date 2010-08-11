@@ -68,8 +68,9 @@
       $("div.container").children(field).text($(this).val());
     });
     $("div.fld").click(function(el){
-      $("form#folioinfo div").removeClass().addClass($(this).attr("class").replace("fld ", ""));
-      $("form#foliostyle #cname").val($(this).attr("class").replace("fld ", ""));
+      var field = $(this).attr("class").replace("fld ", "");
+      $("form#folioinfo div").removeClass().addClass(field);
+      $("form#foliostyle #cname").val(field);
       $("form#foliostyle #cfield").val("font-size");
       $("form#foliostyle #cvalue").val($(this).css("font-size"));
     });
