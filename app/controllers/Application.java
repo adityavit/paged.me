@@ -31,57 +31,68 @@ public class Application extends Controller {
 	}
 
 	public static void index() {
-		// get the subdomain, requested for.
+		//@todo, validation here.
+		//get the subdomain, requested for.
 		String sbdomain[] = request.domain.split("\\.");
-
+		
+		//@todo needs to be cleanup. this is messy.
 		User user = User.find("byFolioname", sbdomain[0]).first();
 		if (user == null && !FB_COOKIE_MAP.isEmpty()) {
 			user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
 		}
-
-		// @todo fix this nasty check.
+		
+		//@todo fix this nasty check.
 		if (sbdomain.length == 2 || sbdomain[0].equals("www")) {
 			render("Application/welcome.html", user);
 		} else {
 			// user null check; throw 404.
 			notFoundIfNull(user);
-
-			System.out.println("style is :: " + user.style);
+			
 			// user found, render the page.
 			render(user);
 		}
 	}
 
 	public static void addStyle(String cname, String cfield, String cvalue) {
-		String matched = "", cfieldregx = "", cvalueregx ="";
+		String matched = "";
+		String cssfv = cfield + ":" + cvalue;
 		
-		String regex = "."
-				+ cname
-				+ "(\\{(([a-zA-Z]|-)*:(#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})|([0-9a-zA-Z]|-)*);?)*?\\})";
+		String cfieldregx = "([a-zA-Z]|-)*";
+		String cvalueregx = ":(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|([0-9a-zA-Z]|-)*)";
+		String classregex = "." + cname + "(\\{(" + cfieldregx + cvalueregx + ";?)*?\\})";
 
 		// user null check; throw 404.
 		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
 		notFoundIfNull(user);
 
-		Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
+		Pattern pattern = Pattern.compile(classregex, Pattern.CASE_INSENSITIVE);
 		Matcher matcher = pattern.matcher(user.style);
-
+		
+		//@todo. needs to be cleaned up.
 		if (matcher.find()) {
 			matched = matcher.group();
 			if (!matched.contains(cfield)) {
-				matched = matched.substring(0, matched.length() - 1) + cfield + ":" + cvalue + ";}";
+				//adding a new css field.
+				matched = addNewCssField(matched, cssfv);
+			} else {
+				//updating the existing new css field.
+				matched = matched.replaceAll(cfield + cvalueregx, cssfv);
 			}
-			matched = matched.replaceAll(cfield
-					+ ":(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|([0-9a-zA-Z]|-)*)",
-					cfield + ":" + cvalue);
-
 			user.style = matcher.replaceAll(matched);
 		} else {
-			user.style += "." + cname + "{" + cfield + ":" + cvalue + ";}";
+			user.style = user.style.concat(addNewCssClass(cname, cssfv));
 		}
-		System.out.println("userstyle :: " + user.style);
 		user.save();
 		renderJSON(user);
+	}
+
+	static String addNewCssField(String matched, String cssfv) {
+		return matched.replaceAll("}", cssfv + ";}");
+		// return matched.substring(0, matched.length() - 1) + cssfv + ";}";
+	}
+
+	static String addNewCssClass(String cname, String cssfv) {
+		return "." + cname + "{" + cssfv + ";}";
 	}
 
 	public static void updateStyle(String cssstyle) {

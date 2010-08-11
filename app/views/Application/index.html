@@ -29,8 +29,8 @@
     </div>
     #{form @Application.addStyle(), id:'foliostyle'}
     <div id="foliostyle-form">
-    <input type="hidden" name="cname" id="cname" value="${params.cname}"/>
-    <input type="hidden" name="cfield" id="cfield" value="${params.cfield}"/>
+    <input type="text" name="cname" id="cname" value="${params.cname}"/>
+    <input type="text" name="cfield" id="cfield" value="${params.cfield}"/>
     <input type="text" name="cvalue" id="cvalue" value="${params.cvalue}"/>
     <input type="submit" value="apply"/>
     <div id="colorpicker"></div>
@@ -58,10 +58,10 @@
       }, 'json');
       return false;
     });
-    $("form#foliostyle input").live('change', function(el){
-      $("div.folio-container div."+$("form#foliostyle #cname").val()).css($("form#foliostyle #cfield").val(), $("form#foliostyle #cvalue").val());
-      $("form#foliostyle").submit();
-    });
+//    $("form#foliostyle input").live('change', function(el){
+//      $("div.folio-container div."+$("form#foliostyle #cname").val()).css($("form#foliostyle #cfield").val(), $("form#foliostyle #cvalue").val());
+//      $("form#foliostyle").submit();
+//    });
     $("form#folioinfo input,form#folioinfo textarea").live('keydown', function(el){
       $("div.folio-container div."+$(this).attr("class")).text($(this).val());
       $("form#folioinfo").submit();
