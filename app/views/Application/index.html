@@ -1,6 +1,6 @@
 #{extends 'main.html' /}
 #{set title: user.name /}
-<div class="folio-container">
+<div class="container">
   <div class="name">${user.name}</div>
   <div class="email">${user.email}</div>
   <div class="aboutme">${user.aboutme}</div>
@@ -59,11 +59,11 @@
       return false;
     });
 //    $("form#foliostyle input").live('change', function(el){
-//      $("div.folio-container div."+$("form#foliostyle #cname").val()).css($("form#foliostyle #cfield").val(), $("form#foliostyle #cvalue").val());
+//      $("div.container div."+$("form#foliostyle #cname").val()).css($("form#foliostyle #cfield").val(), $("form#foliostyle #cvalue").val());
 //      $("form#foliostyle").submit();
 //    });
     $("form#folioinfo input,form#folioinfo textarea").live('keydown', function(el){
-      $("div.folio-container div."+$(this).attr("class")).text($(this).val());
+      $("div.container div."+$(this).attr("class")).text($(this).val());
       $("form#folioinfo").submit();
     });
     $("div.name,div.email,div.aboutme,div.contact").click(function(el){
@@ -79,7 +79,7 @@
         $("div#colorpicker").hide();
       }
       $("form#foliostyle #cfield").val($(this).attr("field"));
-      $("form#foliostyle #cname").val($("div.folio-container ." +$("form#foliostyle #cname").val()).css($(this).attr("field")));
+      $("form#foliostyle #cname").val($("div.container ." +$("form#foliostyle #cname").val()).css($(this).attr("field")));
     });
     $("div.settings").accordion();
     $("div.settings").draggable({ containment: 'window' });
