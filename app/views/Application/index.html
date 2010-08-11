@@ -1,30 +1,29 @@
 #{extends 'main.html' /}
 #{set title: user.name /}
 <div class="container">
-  <div class="name">${user.name}</div>
-  <div class="email">${user.email}</div>
-  <div class="aboutme">${user.aboutme}</div>
-  <div class="contact">${user.contact}</div>
+  <div class="fld name">${user.name}</div>
+  <div class="fld email">${user.email}</div>
+  <div class="fld aboutme">${user.aboutme}</div>
+  <div class="fld contact">${user.contact}</div>
 </div>
-
 #{if uid && user && uid == user.fbuid }
 <div class="settings">
   <h3><a href="#">my folio</a></h3>
   <div class="my-folio">
     #{form @Application.addinfo(), id:'folioinfo', class:'name'}
     <div id="folioinfo-form">
-      <input class="name" type="text" name="name" value="${user.name}"/>
-      <input class="email" type="text" name="email" value="${user.email}"/>
-      <input class="contact" type="text" name="contact" value="${user.contact}"/>
-      <textarea class="aboutme" name="aboutme">${user.aboutme}</textarea>
+      <input class="fld name" type="text" name="name" value="${user.name}"/>
+      <input class="fld email" type="text" name="email" value="${user.email}"/>
+      <input class="fld contact" type="text" name="contact" value="${user.contact}"/>
+      <textarea class="fld aboutme" name="aboutme">${user.aboutme}</textarea>
     </div>
     #{/form}
-    <div class="style-controls">
+    <div class="controls">
       <ul>
-        <li><a class="ffamily" field="font-family" href="#">ffamily</a></li>
-        <li><a class="fsize" field="font-size" href="#">fsize</a></li>
-        <li><a class="fcolor" field="color" href="#">fcolor</a></li>
-        <li><a class="fbg" field="background" href="#">fbg</a></li>
+        <li><a class="ctrl ff" field="font-family" href="#">ffamily</a></li>
+        <li><a class="ctrl fs" field="font-size" href="#">fsize</a></li>
+        <li><a class="ctrl fc" field="color" href="#">fcolor</a></li>
+        <li><a class="ctrl bc" field="background" href="#">fbg</a></li>
       </ul>
     </div>
     #{form @Application.addStyle(), id:'foliostyle'}
@@ -40,9 +39,7 @@
   <h3><a href="#">folio-palettes</a></h3>
   <div class="folio-palettes"></div>
 </div>
-
 <div class="fb-banner editmode"><span>changed saved successfuly.</span></div>
-
 <script type="text/javascript">
   $(function() {
     $("form#foliostyle").submit(function(){
@@ -52,27 +49,31 @@
       }, 'json');
       return false;
     });
+//    $("form#foliostyle input").live('change', function(el){
+//      $("div.container div."+$("form#foliostyle #cname").val()).css($("form#foliostyle #cfield").val(), $("form#foliostyle #cvalue").val());
+//      $("form#foliostyle").submit();
+//    });
     $("form#folioinfo").submit(function(){
       $.post('@{Application.addinfo()}', $("#folioinfo").serialize(), function(style){
         $(".editmode").fadeIn(2000).delay(1000).fadeOut(2000);
       }, 'json');
       return false;
     });
-//    $("form#foliostyle input").live('change', function(el){
-//      $("div.container div."+$("form#foliostyle #cname").val()).css($("form#foliostyle #cfield").val(), $("form#foliostyle #cvalue").val());
-//      $("form#foliostyle").submit();
-//    });
-    $("form#folioinfo input,form#folioinfo textarea").live('keydown', function(el){
-      $("div.container div."+$(this).attr("class")).text($(this).val());
+    //done post form on "change" event, exclusively to prevent high number of ajax posts.
+    $("form .fld").live('change', function(el){
       $("form#folioinfo").submit();
     });
-    $("div.name,div.email,div.aboutme,div.contact").click(function(el){
-      $("form#folioinfo div").removeClass().addClass($(this).attr("class"));
-      $("form#foliostyle #cname").val($(this).attr("class"));
+    $("form .fld").live('keydown', function(el){
+      var field = $(this).attr("class").replace("fld ", ".");
+      $("div.container").children(field).text($(this).val());
+    });
+    $("div.fld").click(function(el){
+      $("form#folioinfo div").removeClass().addClass($(this).attr("class").replace("fld ", ""));
+      $("form#foliostyle #cname").val($(this).attr("class").replace("fld ", ""));
       $("form#foliostyle #cfield").val("font-size");
       $("form#foliostyle #cvalue").val($(this).css("font-size"));
     });
-    $("div.style-controls li a").live('click', function(el){
+    $("div.controls li a").live('click', function(el){
       if($(this).attr("field") == "color" || $(this).attr("field") == "background" ){
         $("div#colorpicker").show();
       } else {

@@ -129,12 +129,12 @@ form#folioinfo div.aboutme textarea.aboutme, form#folioinfo div.name input.name,
     display: block;
 }
 
-.style-controls li {
+.controls li {
     float: left;
     padding: 3px 5px 3px 0;
 }
 
-.style-controls a {
+.controls a {
     color: #ffffff;
 }
 
