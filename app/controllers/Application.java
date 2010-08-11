@@ -54,9 +54,10 @@ public class Application extends Controller {
 
 	public static void addStyle(String cname, String cfield, String cvalue) {
 		String matched = "", cfieldregx = "", cvalueregx ="";
+		
 		String regex = "."
 				+ cname
-				+ "(\\{(([a-z]|-)*:(#([a-f0-9]{6}|[a-f0-9]{3})|([0-9a-z]|-)*);?)*?\\})";
+				+ "(\\{(([a-zA-Z]|-)*:(#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})|([0-9a-zA-Z]|-)*);?)*?\\})";
 
 		// user null check; throw 404.
 		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
@@ -78,6 +79,7 @@ public class Application extends Controller {
 		} else {
 			user.style += "." + cname + "{" + cfield + ":" + cvalue + ";}";
 		}
+		System.out.println("userstyle :: " + user.style);
 		user.save();
 		renderJSON(user);
 	}
