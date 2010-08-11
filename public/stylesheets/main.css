@@ -3,11 +3,10 @@
     overflow: hidden;
 }
 
-/*
- .name, .about, .contact, .email {
- position: absolute;
- }
- */
+.hide, .error {
+    display: none;
+}
+
 .name {
     font-size: 60px;
     font-family: 'Inconsolata', serif;
@@ -72,6 +71,10 @@
     background: #EFFAB4;
 }
 
+{
+    height: 300px;
+}
+
 .settings {
     width: 300px;
     opacity: 0.7;
@@ -102,31 +105,16 @@ input[type = text] {
     padding: 5px;
     width: 200px;
     border: 1px #e0e0e0 solid;
+    color: #000000;
+    background: #ffffff;
+    font-size: 30px;
+    font-family: 'Reenie Beanie', serif;
 }
 
 textarea {
     margin: 2px 0;
     padding: 5px;
     border: 1px #e0e0e0 solid;
-}
-
-.hide, .error {
-    display: none;
-}
-
-.my-folio {
-    height: 300px;
-}
-
-form#folioinfo input, form#folioinfo textarea {
-    display: none;
-}
-
-form#folioinfo div.aboutme textarea.aboutme, form#folioinfo div.name input.name, form#folioinfo div.email input.email, form#folioinfo div.contact input.contact {
-    font-size: 15px;
-    color: #000000;
-    background: #ffffff;
-    display: block;
 }
 
 .controls li {

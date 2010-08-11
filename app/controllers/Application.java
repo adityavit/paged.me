@@ -107,15 +107,22 @@ public class Application extends Controller {
 		renderJSON(user);
 	}
 
-	public static void addinfo(String name, String aboutme, String contact,
-			String email) {
+	public static void addinfo(String fname, String fvalue) {
 		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
-		user.name = name;
-		user.email = email;
-		user.aboutme = aboutme;
-		user.contact = contact;
+		
+		if ("name".equals(fname))
+			user.name = fvalue;
+		
+		if ("email".equals(fname))
+			user.email = fvalue;
+		
+		if ("aboutme".equals(fname))
+			user.aboutme = fvalue;
+		
+		if ("contact".equals(fname))
+			user.contact = fvalue;
+		
 		user.save();
-
 		renderJSON("");
 	}
 

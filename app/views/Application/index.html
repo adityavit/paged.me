@@ -9,14 +9,10 @@
 #{if uid && user && uid == user.fbuid }
 <div class="settings">
   <h3><a href="#">my folio</a></h3>
-  <div class="my-folio">
-    #{form @Application.addinfo(), id:'folioinfo', class:'name'}
-    <div id="folioinfo-form">
-      <input class="fld name" type="text" name="name" value="${user.name}"/>
-      <input class="fld email" type="text" name="email" value="${user.email}"/>
-      <input class="fld contact" type="text" name="contact" value="${user.contact}"/>
-      <textarea class="fld aboutme" name="aboutme">${user.aboutme}</textarea>
-    </div>
+  <div id="my-folio help">
+    #{form @Application.addinfo(), id:'folioinfo'}
+      <input class="fld fvalue" type="text" name="fvalue" value="click to edit it."/>
+      <input class="fld fname" type="hidden" name="fname" value="txt"/>
     #{/form}
     <div class="controls">
       <ul>
@@ -27,13 +23,11 @@
       </ul>
     </div>
     #{form @Application.addStyle(), id:'foliostyle'}
-    <div id="foliostyle-form">
-    <input type="text" name="cname" id="cname" value="${params.cname}"/>
-    <input type="text" name="cfield" id="cfield" value="${params.cfield}"/>
-    <input type="text" name="cvalue" id="cvalue" value="${params.cvalue}"/>
-    <input type="submit" value="apply"/>
-    <div id="colorpicker"></div>
-    </div>
+      <input type="text" name="cname" id="cname" value="${params.cname}"/>
+      <input type="text" name="cfield" id="cfield" value="${params.cfield}"/>
+      <input type="text" name="cvalue" id="cvalue" value="${params.cvalue}"/>
+      <input type="submit"/>
+      <div id="colorpicker"></div>
     #{/form}
   </div>
   <h3><a href="#">folio-palettes</a></h3>
@@ -53,6 +47,20 @@
 //      $("div.container div."+$("form#foliostyle #cname").val()).css($("form#foliostyle #cfield").val(), $("form#foliostyle #cvalue").val());
 //      $("form#foliostyle").submit();
 //    });
+    $("div.controls li a").live('click', function(el){
+//      $("form#foliostyle #cname").val(field);
+//      $("form#foliostyle #cfield").val("font-size");
+//      $("form#foliostyle #cvalue").val($(this).css("font-size"));
+
+//      $("form#foliostyle #cname").val($("div.container ." +$("form#foliostyle #cname").val()).css($(this).attr("field")));
+//      $("form#foliostyle #cfield").val($(this).attr("field"));
+
+//      if($(this).attr("field") == "color" || $(this).attr("field") == "background" ){
+//        $("div#colorpicker").show();
+//      } else {
+//        $("div#colorpicker").hide();
+//      }
+    });
     $("form#folioinfo").submit(function(){
       $.post('@{Application.addinfo()}', $("#folioinfo").serialize(), function(style){
         $(".editmode").fadeIn(2000).delay(1000).fadeOut(2000);
@@ -63,25 +71,15 @@
     $("form .fld").live('change', function(el){
       $("form#folioinfo").submit();
     });
-    $("form .fld").live('keydown', function(el){
-      var field = $(this).attr("class").replace("fld ", ".");
-      $("div.container").children(field).text($(this).val());
+    $("form input.fld").live('keydown', function(el){
+      var fname = "." + $("input.fname").val();
+      var fvalue = $("input.fvalue").val();
+      $("div.container").children(fname).text(fvalue);
     });
-    $("div.fld").click(function(el){
+    $("div.fld").live('click', function(el){
       var field = $(this).attr("class").replace("fld ", "");
-      $("form#folioinfo div").removeClass().addClass(field);
-      $("form#foliostyle #cname").val(field);
-      $("form#foliostyle #cfield").val("font-size");
-      $("form#foliostyle #cvalue").val($(this).css("font-size"));
-    });
-    $("div.controls li a").live('click', function(el){
-      if($(this).attr("field") == "color" || $(this).attr("field") == "background" ){
-        $("div#colorpicker").show();
-      } else {
-        $("div#colorpicker").hide();
-      }
-      $("form#foliostyle #cfield").val($(this).attr("field"));
-      $("form#foliostyle #cname").val($("div.container ." +$("form#foliostyle #cname").val()).css($(this).attr("field")));
+      $("input.fvalue").val($(this).text());
+      $("input.fname").val(field);
     });
     $("div.settings").accordion();
     $("div.settings").draggable({ containment: 'window' });
