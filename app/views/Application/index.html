@@ -23,10 +23,9 @@
       </ul>
     </div>
     #{form @Application.addStyle(), id:'foliostyle'}
-      <input type="text" name="cname" id="cname" value="${params.cname}"/>
-      <input type="text" name="cfield" id="cfield" value="${params.cfield}"/>
+      <input type="hidden" name="cname" id="cname" value="${params.cname}"/>
+      <input type="hidden" name="cfield" id="cfield" value="${params.cfield}"/>
       <input type="text" name="cvalue" id="cvalue" value="${params.cvalue}"/>
-      <input type="submit"/>
       <div id="colorpicker"></div>
     #{/form}
   </div>
@@ -47,21 +46,27 @@
 //      $("div.container div."+$("input#cname").val()).css($("input#cfield").val(), $("input#cvalue").val());
 //      $("form#foliostyle").submit();
 //    });
-    $("div.controls li a").live('click', function(el){
-      var cname = $("input.fname").val();
-      var cfield = $(this).attr("field");
-      var cvalue = $("div.container").children("."+cname).css(cfield);
+    
+    var updateSF = function (cfield, cvalue, cname){
+      //this might be source of bugs.
+      //@todo, put strong checks here.
+      cname = cname || $("input.fname").val();
+      cvalue = cvalue || $("div.container").children("."+cname).css(cfield);
 
       $("input#cname").val(cname);
       $("input#cfield").val(cfield);
       $("input#cvalue").val(cvalue);
-
+    }
+    $("div.controls li a").live('click', function(el){
+      //update styleform.
+      updateSF($(this).attr("field"));
 //      if(cfield == "color" || cfield == "background" ){
 //        $("div#colorpicker").show();
 //      } else {
 //        $("div#colorpicker").hide();
 //      }
     });
+    
     $("form#folioinfo").submit(function(){
       $.post('@{Application.addinfo()}', $("#folioinfo").serialize(), function(style){
         $(".editmode").fadeIn(2000).delay(1000).fadeOut(2000);
@@ -82,12 +87,8 @@
       $("input.fvalue").val($(this).text());
       $("input.fname").val(field);
       
-      var cname = $("input.fname").val();
-      var cfield = "font-family";
-      var cvalue = $("div.container").children("."+cname).css(cfield);
-      $("input#cname").val(cname);
-      $("input#cfield").val(cfield);
-      $("input#cvalue").val(cvalue);
+      //update styleform.
+      updateSF("font-family");
     });
     $("div.settings").accordion();
     $("div.settings").draggable({ containment: 'window' });
