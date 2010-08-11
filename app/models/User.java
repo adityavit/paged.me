@@ -29,9 +29,12 @@ public class User extends Model {
 	@Required
 	public String aboutme;
 
-	// now this must be an address object of its own.
+	//now this must be an address object of its own.
 	@Required
 	public String contact;
+
+    //custom styling user has defined.
+    public String style;
 	
 	public User(String fbuid, String folioname) {
 		this.fbuid= fbuid;
@@ -40,6 +43,7 @@ public class User extends Model {
 		this.email = "NO EMAIL.";
 		this.aboutme = "NOPE NOTHING.";
 		this.contact = "NOPE NOT REACHABLE.";
+		this.style = "";
 	}
 	
 	public User(String name, String email, String aboutme, String contact) {

@@ -12,7 +12,7 @@
   <h3><a href="#">my folio</a></h3>
   <div class="my-folio">
     #{form @Application.addinfo(), id:'folioinfo', class:'name'}
-    <div id="folioinfo-form" class="name">
+    <div id="folioinfo-form">
       <input class="name" type="text" name="name" value="${user.name}"/>
       <input class="email" type="text" name="email" value="${user.email}"/>
       <input class="contact" type="text" name="contact" value="${user.contact}"/>
@@ -29,9 +29,9 @@
     </div>
     #{form @Application.addStyle(), id:'foliostyle'}
     <div id="foliostyle-form">
-    <input type="hidden" name="value" id="value" value="${params.value}"/>
-    <input type="hidden" name="element" id="element" value="${params.element}"/>
-    <input type="text" name="elementValue" id="elementValue" value="${params.elementValue}"/>
+    <input type="hidden" name="cname" id="cname" value="${params.cname}"/>
+    <input type="hidden" name="cfield" id="cfield" value="${params.cfield}"/>
+    <input type="text" name="cvalue" id="cvalue" value="${params.cvalue}"/>
     <input type="submit" value="apply"/>
     <div id="colorpicker"></div>
     </div>
@@ -46,8 +46,8 @@
 <script type="text/javascript">
   $(function() {
     $("form#foliostyle").submit(function(){
-      $.post('@{Application.addStyle()}', $("form#foliostyle").serialize(), function(style){
-        $("style").text(style.value);
+      $.post('@{Application.addStyle()}', $("form#foliostyle").serialize(), function(user){
+        $("style").text(user.style);
         $(".editmode").fadeIn(3000).delay(1000).fadeOut(3000);
       }, 'json');
       return false;
@@ -59,7 +59,7 @@
       return false;
     });
     $("form#foliostyle input").live('change', function(el){
-      $("div.folio-container div."+$("form#foliostyle #value").val()).css($("form#foliostyle #element").val(), $("form#foliostyle #elementValue").val());
+      $("div.folio-container div."+$("form#foliostyle #cname").val()).css($("form#foliostyle #cfield").val(), $("form#foliostyle #cvalue").val());
       $("form#foliostyle").submit();
     });
     $("form#folioinfo input,form#folioinfo textarea").live('keydown', function(el){
@@ -68,9 +68,9 @@
     });
     $("div.name,div.email,div.aboutme,div.contact").click(function(el){
       $("form#folioinfo div").removeClass().addClass($(this).attr("class"));
-      $("form#foliostyle #value").val($(this).attr("class"));
-      $("form#foliostyle #element").val("font-size");
-      $("form#foliostyle #elementValue").val($(this).css("font-size"));
+      $("form#foliostyle #cname").val($(this).attr("class"));
+      $("form#foliostyle #cfield").val("font-size");
+      $("form#foliostyle #cvalue").val($(this).css("font-size"));
     });
     $("div.style-controls li a").live('click', function(el){
       if($(this).attr("field") == "color" || $(this).attr("field") == "background" ){
@@ -78,12 +78,12 @@
       } else {
         $("div#colorpicker").hide();
       }
-      $("form#foliostyle #element").val($(this).attr("field"));
-      $("form#foliostyle #elementValue").val($("div.folio-container ." +$("form#foliostyle #value").val()).css($(this).attr("field")));
+      $("form#foliostyle #cfield").val($(this).attr("field"));
+      $("form#foliostyle #cname").val($("div.folio-container ." +$("form#foliostyle #cname").val()).css($(this).attr("field")));
     });
     $("div.settings").accordion();
     $("div.settings").draggable({ containment: 'window' });
-    $("#colorpicker").farbtastic('#elementValue');
+//    $("#colorpicker").farbtastic('#cname');
   });
 </script>
 #{/if}

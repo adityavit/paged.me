@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import models.Style;
 import models.User;
 import play.data.validation.Email;
 import play.data.validation.Required;
@@ -40,67 +39,63 @@ public class Application extends Controller {
 			user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
 		}
 
-		Style style = Style.find("byField", sbdomain[0]).first();
-
 		// @todo fix this nasty check.
 		if (sbdomain.length == 2 || sbdomain[0].equals("www")) {
 			render("Application/welcome.html", user);
 		} else {
 			// user null check; throw 404.
 			notFoundIfNull(user);
+
+			System.out.println("style is :: " + user.style);
 			// user found, render the page.
-			render(user, style);
+			render(user);
 		}
 	}
 
-	public static void addStyle(String value, String element,
-			String elementValue) {
-		if (validation.hasErrors()) {
-			render("Application/index.html");
-		}
-		String matched = "";
+	public static void addStyle(String cname, String cfield, String cvalue) {
+		String matched = "", cfieldregx = "", cvalueregx ="";
 		String regex = "."
-				+ value
+				+ cname
 				+ "(\\{(([a-z]|-)*:(#([a-f0-9]{6}|[a-f0-9]{3})|([0-9a-z]|-)*);?)*?\\})";
 
-		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
 		// user null check; throw 404.
+		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
 		notFoundIfNull(user);
-
-		// need a better check here.
-		Style style = Style.find("byField", user.folioname).first();
-		String css = style.value.toLowerCase();
 
 		Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-		Matcher matcher = pattern.matcher(css);
-		
-		while (matcher.find()) {
+		Matcher matcher = pattern.matcher(user.style);
+
+		if (matcher.find()) {
 			matched = matcher.group();
-			if (!matched.contains(element)){
-				matched = matched.substring(0, matched.length() - 1) + element + ":" + elementValue + ";}";
+			if (!matched.contains(cfield)) {
+				matched = matched.substring(0, matched.length() - 1) + cfield + ":" + cvalue + ";}";
 			}
-			matched = matched.replaceAll(element
+			matched = matched.replaceAll(cfield
 					+ ":(#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})|([0-9a-zA-Z]|-)*)",
-					element + ":" + elementValue);
-			style.value = matcher.replaceAll(matched);
-			style.save();
+					cfield + ":" + cvalue);
+
+			user.style = matcher.replaceAll(matched);
+		} else {
+			user.style += "." + cname + "{" + cfield + ":" + cvalue + ";}";
 		}
-		renderJSON(style);
+		user.save();
+		renderJSON(user);
 	}
-	
-	public static void updateStyle(String cssstyle){
+
+	public static void updateStyle(String cssstyle) {
 		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
 		// user null check; throw 404.
 		notFoundIfNull(user);
 
 		// need a better check here.
-		Style style = Style.find("byField", user.folioname).first();
-		style.value = cssstyle.toLowerCase();
-		style.save();
-		renderJSON(style);
+		user.style = cssstyle.toLowerCase();
+		user.save();
+
+		renderJSON(user);
 	}
 
-	public static void addinfo(String name, String aboutme, String contact, String email) {
+	public static void addinfo(String name, String aboutme, String contact,
+			String email) {
 		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
 		user.name = name;
 		user.email = email;
@@ -115,7 +110,7 @@ public class Application extends Controller {
 		// @todo validation.
 		User user = new User(FB_COOKIE_MAP.get("uid"), folioname);
 		user.save();
-		
+
 		renderJSON(user);
 	}
 

@@ -11,7 +11,9 @@
   #{form @Application.addfolio(), id:'createfolio'}
     <p class="error">folioname iiis required.</p>
     <p>
-      <input type="text" id="folioname" name="folioname" value="${params.folioname}"/>
+      <span class="domain">http://</span>
+      <input class="domain" type="text" name="folioname"/>
+      <span class="domain">.tst.it/</span>
       <input type="submit"/>
     </p>
   #{/form}

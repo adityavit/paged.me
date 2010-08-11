@@ -3,6 +3,7 @@
     
 User(phoenix24):
     isAdmin:    true
+    name:       phoenix24
     folioname:  phoenix24
     email:      phoenix24@gmail.com
     password:   secret
@@ -10,8 +11,10 @@ User(phoenix24):
     aboutme:    
                 i am a programmer and a hacker!
                 yesh! honey! :D
+    style:      .body{background:red;}.name{font-size:60px;}.about{font-size:60px;font-family:arial;color:#abcfff;}.contact{color:#abcfff;}.email{}
 
 User(bluebat):
+    name:  bluebat
     folioname:  bluebat
     email:      bluebat@gmail.com
     password:   secret
@@ -19,8 +22,10 @@ User(bluebat):
     aboutme:    
                 i am a superhero!
                 yesh ofcourse!! i fight the bad guys.
+    style:      .body{background:red;}.name{font-size:60px;}.about{font-size:60px;font-family:arial;color:#abcfff;}.contact{color:#abcfff;}.email{}
 
 User(bobthecat):
+    name:       bobthecat
     folioname:  bobthecat
     email:      bobthecat@gmail.com
     password:   secret
@@ -28,20 +33,4 @@ User(bobthecat):
     aboutme:    
                 i am a blue bat!
                 how wierd do you think i could ever be ?
-
-Style(phoenix24):
-    field:      phoenix24
-    value:      .body{background:red;}.name{font-size:60px;}.about{font-size:60px;font-family:arial;color:#abcfff;}.contact{color:#abcfff;}.email{}
-    
-Style(bluebat):
-    field:      bluebat
-    value:      .body{background:red;}.name{font-size:60px;}.about{font-size:60px;font-family:arial;color:#abcfff;}.contact{color:#abcfff;}.email{}
-    
-Style(bobthecat):
-    field:      bobthecat
-    value:      .body{background:red;}.name{font-size:60px;}.about{font-size:60px;font-family:arial;color:#abcfff;}.contact{color:#abcfff;}.email{}
-    
-Style(crazyduck):
-    field:      crazyduck
-    value:      .body{background:red;}.name{font-size:60px;}.about{font-size:60px;font-family:arial;color:#abcfff;}.contact{color:#abcfff;}.email{}
-    
+    style:      .body{background:red;}.name{font-size:60px;}.about{font-size:60px;font-family:arial;color:#abcfff;}.contact{color:#abcfff;}.email{}
