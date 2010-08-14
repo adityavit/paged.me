@@ -1,3 +1,7 @@
-h3. paged.me
+h3. Teeziner!
 
-a simple application to make beautiful online folios!!
+Is a simple app, where our awesome designers showcase their works.
+well, this is pre-launch, so more to come. :P
+
+bq. "http://teeziners.shrrts.com":http://teeziners.shrrts.com
+
