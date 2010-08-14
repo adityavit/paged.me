@@ -33,30 +33,18 @@ public class Application extends Controller {
 	public static void index() {
 		//teeziner welcome page, we'd probably display a collection here.
 		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
-		render("Application/welcome.html", user);
+		render(user);
 	}
 	
-	public static void userfolio(){
+	public static void folio(String folioname){
 		//@todo, validation here.
-		//get the subdomain, requested for.
-		String sbdomain[] = request.domain.split("\\.");
+		User user = User.find("byFolioname", folioname).first();
 		
-		//@todo needs to be cleanup. this is messy.
-		User user = User.find("byFolioname", sbdomain[0]).first();
-		if (user == null && !FB_COOKIE_MAP.isEmpty()) {
-			user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
-		}
+		//user not found, throw error!
+		notFoundIfNull(user);
 		
-		//@todo fix this nasty check.
-		if (sbdomain.length == 2 || sbdomain[0].equals("www")) {
-			render("Application/welcome.html", user);
-		} else {
-			// user null check; throw 404.
-			notFoundIfNull(user);
-			
-			// user found, render the page.
-			render(user);
-		}
+		//user found, render the page.
+		render(user);
 	}
 
 	public static void addStyle(String cname, String cfield, String cvalue) {

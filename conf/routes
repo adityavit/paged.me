@@ -4,7 +4,7 @@
 
 # Home page
 GET     /                                       Application.index
-GET     /{userfolio}                             Application.userfolio
+GET     /{folioname}                            Application.folio
 
 POST    /addinfo                                Application.info
 POST    /addfolio                               Application.addfolio
