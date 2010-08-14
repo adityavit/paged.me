@@ -31,8 +31,17 @@
   </div>
   <h3><a href="#">folio-palettes</a></h3>
   <div class="folio-palettes"></div>
+  <h3><a href="#">upload-designs</a></h3>
+  <div class="upload-designs">
+    #{form @Application.addDesign(), id:'uploaddesign', enctype:"multipart/form-data"}
+      <!-- limit the file selection to defined types -->
+      <input type="file" name="designfile" id="designfile" accept="image/png, image/jpeg">
+      <input type="submit">
+    #{/form}
+  </div>
 </div>
-<div class="fb-banner editmode"><span>changed saved successfuly.</span></div>
+<div class="ch-banner challenge"><span>new design challenge!</span></div>
+<div class="ed-banner editmode"><span>changed saved successfuly.</span></div>
 <script type="text/javascript">
   $(function() {
     var updateSF = function (cfield, cvalue, cname){

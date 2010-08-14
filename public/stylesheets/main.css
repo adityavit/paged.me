@@ -34,7 +34,7 @@
     display: none;
 }
 
-.fb-banner {
+.ed-banner, .ch-banner, .fb-banner {
     margin: 0;
     padding: 5px 0 10px 0;
     position: absolute;
@@ -43,6 +43,15 @@
     font-size: 30px;
     font-family: 'Reenie Beanie', serif;
     background: #DAE02F;
+}
+
+.ed-banner{
+    padding: 3px 0 3px 0;
+    font-size: 25px;
+}
+.ch-banner {
+    height: 100px;
+    background: #970610;
 }
 
 .fb-banner .contact {
@@ -69,10 +78,8 @@
     font-family: 'Reenie Beanie', serif;
     color: #000000;
     background: #EFFAB4;
-}
-
-{
-    height: 300px;
+} {height:
+    300px;
 }
 
 .settings {

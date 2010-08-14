@@ -1,13 +1,14 @@
 package controllers;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import models.User;
-import play.data.validation.Email;
 import play.data.validation.Required;
+import play.libs.Files;
 import play.mvc.Before;
 import play.mvc.Controller;
 
@@ -126,5 +127,10 @@ public class Application extends Controller {
 		user.save();
 
 		renderJSON(user);
+	}
+	
+	public static void addDesign(File designfile){
+		designfile.renameTo(new File("public/designs/" + designfile.getName()));
+		renderJSON("");
 	}
 }
