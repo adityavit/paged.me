@@ -4,10 +4,13 @@
 
 # Home page
 GET     /                                       Application.index
+GET     /{userfolio}                             Application.userfolio
+
 POST    /addinfo                                Application.info
 POST    /addfolio                               Application.addfolio
 POST    /addstyle                               Application.addStyle
 POST    /updatestyle                            Application.updateStyle
+
 
 GET     /emailer                                Application.emailer
 

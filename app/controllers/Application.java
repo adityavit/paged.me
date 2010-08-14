@@ -31,6 +31,12 @@ public class Application extends Controller {
 	}
 
 	public static void index() {
+		//teeziner welcome page, we'd probably display a collection here.
+		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
+		render("Application/welcome.html", user);
+	}
+	
+	public static void userfolio(){
 		//@todo, validation here.
 		//get the subdomain, requested for.
 		String sbdomain[] = request.domain.split("\\.");
