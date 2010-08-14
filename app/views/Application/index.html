@@ -11,16 +11,15 @@
   #{form @Application.addfolio(), id:'createfolio'}
     <p class="error">folioname iiis required.</p>
     <p>
-      <span class="domain">http://</span>
+      <span class="domain">http://tst.it/</span>
       <input class="domain" type="text" name="folioname"/>
-      <span class="domain">.tst.it/</span>
       <input type="submit"/>
     </p>
   #{/form}
   </li>
   <li class="folio-name #{if !user }hide#{/if}">
     #{if user }
-    <a href="http://${user.folioname}.tst.it">${user.folioname}.tst.it</a><span>, ah! your folio!</span>
+    <a href="http://tst.it/${user.folioname}">tst.it/${user.folioname}</a><span>, ah! your folio!</span>
     #{/if}
   </li>
   #{/if}
@@ -37,7 +36,7 @@
 $(function(){
   $("#createfolio").submit(function(){
     $.post('@{addfolio()}', $("#createfolio").serialize(), function(folio){
-      $("ul li.folio-name").append('<a href="http://' + folio.folioname + '.tst.it">' + folio.folioname + '.tst.it</a><span>, ah! your folio!</span>');
+      $("ul li.folio-name").append('<a href="http://tst.it/'+folio.folioname+'">tst.it/'+folio.folioname+'</a><span>, ah! your folio!</span>');
       $("li.folio-form").hide("slow");
       $("li.folio-name").show("slow");
     }, 'json');

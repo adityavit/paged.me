@@ -127,8 +127,4 @@ public class Application extends Controller {
 
 		renderJSON(user);
 	}
-
-	public static void emailer() {
-		render();
-	}
 }
