@@ -1,0 +1,102 @@
+#{extends 'main.html' /}
+#{set title: user.name /}
+<div class="container">
+  <div class="fld name">${user.name}</div>
+  <div class="fld email">${user.email}</div>
+  <div class="fld aboutme">${user.aboutme}</div>
+  <div class="fld contact">${user.contact}</div>
+</div>
+#{if uid && user && uid == user.fbuid }
+<div class="settings">
+  <h3><a href="#">my folio</a></h3>
+  <div id="my-folio help">
+    #{form @Application.addinfo(), id:'folioinfo'}
+      <input class="fld fvalue" type="text" name="fvalue" value="click to edit it."/>
+      <input class="fld fname" type="hidden" name="fname" value="txt"/>
+    #{/form}
+    <div class="controls">
+      <ul>
+        <li><a class="ctrl ff" field="font-family" href="#">ffamily</a></li>
+        <li><a class="ctrl fs" field="font-size" href="#">fsize</a></li>
+        <li><a class="ctrl fc" field="color" href="#">fcolor</a></li>
+        <li><a class="ctrl bc" field="background" href="#">fbg</a></li>
+      </ul>
+    </div>
+    #{form @Application.addStyle(), id:'foliostyle'}
+      <input type="hidden" name="cname" id="cname" value="${params.cname}"/>
+      <input type="hidden" name="cfield" id="cfield" value="${params.cfield}"/>
+      <input type="text" name="cvalue" id="cvalue" value="${params.cvalue}"/>
+      <div id="colorpicker"></div>
+    #{/form}
+  </div>
+  <h3><a href="#">folio-palettes</a></h3>
+  <div class="folio-palettes"></div>
+</div>
+<div class="fb-banner editmode"><span>changed saved successfuly.</span></div>
+<script type="text/javascript">
+  $(function() {
+    var updateSF = function (cfield, cvalue, cname){
+      //this might be source of bugs.
+      //@todo, put strong checks here.
+      cname = cname || $("input.fname").val();
+      cvalue = cvalue || $("div.container").children("."+cname).css(cfield);
+
+      $("input#cname").val(cname);
+      $("input#cfield").val(cfield);
+      $("input#cvalue").val(cvalue);
+    }
+    $("div.controls li a").live('click', function(el){
+      //update styleform.
+      var cfield = $(this).attr("field");
+      updateSF(cfield);
+      if(cfield == "color" || cfield == "background" ){
+        $("div#colorpicker").show();
+      } else {
+        $("div#colorpicker").hide();
+      }
+    });
+    
+    $("form#foliostyle").submit(function(){
+      $.post('@{Application.addStyle()}', $("form#foliostyle").serialize(), function(user){
+        $("style").text(user.style);
+        $(".editmode").fadeIn(3000).delay(1000).fadeOut(3000);
+      }, 'json');
+      return false;
+    });
+    $("input#cvalue").live('change', function(el){
+      var cname = "." + $("input#cname").val();
+      var cfield = $("input#cfield").val();
+      var cvalue = $("input#cvalue").val();
+      $("div.container").children(cname).css(cfield, cvalue);
+      $("form#foliostyle").submit();
+    });
+    
+    $("form#folioinfo").submit(function(){
+      $.post('@{Application.addinfo()}', $("#folioinfo").serialize(), function(style){
+        $(".editmode").fadeIn(2000).delay(1000).fadeOut(2000);
+      }, 'json');
+      return false;
+    });
+    //done post form on "change" event, exclusively to prevent high number of ajax posts.
+    $("form .fld").live('change', function(el){
+      $("form#folioinfo").submit();
+    });
+    $("form input.fld").live('keydown', function(el){
+      var fname = "." + $("input.fname").val();
+      var fvalue = $("input.fvalue").val();
+      $("div.container").children(fname).text(fvalue);
+    });
+    $("div.fld").live('click', function(el){
+      var field = $(this).attr("class").replace("fld ", "");
+      $("input.fvalue").val($(this).text());
+      $("input.fname").val(field);
+      
+      //update styleform.
+      updateSF("font-family");
+    });
+    $("div.settings").accordion();
+    $("div.settings").draggable({ containment: 'window' });
+    $("#colorpicker").farbtastic('input#cvalue');
+  });
+</script>
+#{/if}
