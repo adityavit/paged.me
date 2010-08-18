@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 import models.User;
 import play.data.validation.Required;
-import play.libs.Files;
 import play.mvc.Before;
 import play.mvc.Controller;
 
@@ -130,7 +129,17 @@ public class Application extends Controller {
 	}
 	
 	public static void addDesign(File designfile){
-		designfile.renameTo(new File("public/designs/" + designfile.getName()));
-		renderJSON("");
+		String filepath = "public/designs/" + designfile.getName();
+		designfile.renameTo(new File(filepath));
+		Design design = new Design( filepath ); 
+		renderJSON(design);
 	}
+	
+	static class Design{
+		String path;
+		public Design(String path){
+			this.path = path;
+		}
+	}
+	
 }
