@@ -40,7 +40,11 @@
     #{/form}
   </div>
 </div>
-<div class="ch-banner challenge"><span>new design challenge!</span></div>
+<div class="ch-banner challenge">
+    <a href="@{Application.resume(user.folioname)}">resume</a>
+    <a href="@{Application.showcase(user.folioname)}">showcase</a>
+</div>
+<!-- div class="ch-banner challenge"><span>new design challenge!</span></div -->
 <div class="ed-banner editmode"><span>changed saved successfuly.</span></div>
 <script type="text/javascript">
   $(function() {

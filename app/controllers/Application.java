@@ -141,5 +141,31 @@ public class Application extends Controller {
 			this.path = path;
 		}
 	}
+
+    public static void quick(){
+        render();
+    }
+
+	public static void resume(String folioname){
+		//@todo, validation here.
+		User user = User.find("byFolioname", folioname).first();
+		
+		//user not found, throw error!
+		notFoundIfNull(user);
+		
+		//user found, render the page.
+		render(user);
+    }
+
+	public static void showcase(String folioname){
+		//@todo, validation here.
+		User user = User.find("byFolioname", folioname).first();
+		
+		//user not found, throw error!
+		notFoundIfNull(user);
+		
+		//user found, render the page.
+		render(user);
+    }
 	
 }

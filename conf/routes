@@ -11,6 +11,9 @@ GET     /public/                                staticDir:public
 #import secure routes.
 *       /                                       module:secure
 
+#static routes for quick style tests.
+GET     /quick                                  Application.quick
+
 #teeziner routes
 POST    /addinfo                                Application.info
 POST    /addfolio                               Application.addfolio
@@ -24,6 +27,8 @@ GET     /challenge                              Application.challenge
 
 GET     /{folioname}                            Application.folio
 GET     /{folioname}/all                        Application.folioall
+GET     /{folioname}/resume                     Application.resume
+GET     /{folioname}/showcase                   Application.showcase
 
 #catch all
 *       /{controller}/{action}                  {controller}.{action}
