@@ -5,12 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine|Inconsolata|Droid+Sans|Reenie+Beanie|IM+Fell+DW+Pica">
-    #{press.stylesheet 'reset.css' /}
-    #{press.stylesheet 'text.css' /}
-    #{press.stylesheet 'farbtastic.css' /}
-    #{press.stylesheet 'main.css' /}
-    <!--- colorpicker : only for the edit mode edition. -->
-    #{press.compressed-stylesheet /}
+    
+    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/reset.css'}">
+    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/text.css'}">
+    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/farbtastic.css'}">
+    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/main.css'}">
 
     <!--- need to fix this. --->
     <style id="user-foliostyle" type="text/css">#{if user}${user.style}#{/if}</style>
@@ -20,10 +19,9 @@
   <body class="body #{get 'bodycss' /}">
     #{doLayout /}
     <div id="fb-root"></div>
+    <script src="@{'/public/javascripts/farbtastic.js'}"></script>
+    <script src="@{'/public/javascripts/main.js'}"></script>
     <script src="http://connect.facebook.net/en_US/all.js"></script>
-    #{press.script 'farbtastic.js' /}
-    #{press.script 'main.js' /}
-    #{press.compressed-script /}
     <script type="text/javascript">
     FB.init({appId: '113305982056815', status: true, cookie: true, xfbml: true});
     FB.Event.subscribe('auth.sessionChange', function(response) {

@@ -1,6 +1,5 @@
 package models;
 
-import java.util.*;
 import java.util.Collection;
 
 import siena.*;
