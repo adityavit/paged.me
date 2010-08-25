@@ -5,12 +5,6 @@
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 
-#import crud routes.
-*       /admin                                  module:crud
-
-#import secure routes.
-*       /                                       module:secure
-
 #static routes for quick style tests.
 GET     /quick                                  Application.quick
 
