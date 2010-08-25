@@ -143,6 +143,7 @@ public class Application extends Controller {
 	public static void index() {
 		//@todo, validation here.
 		User user = User.findByFolioname(subdomain[0]);
+		Logger.debug("domain-requested" + subdomain[0]);
 		
 		//to the homepage!
 		if ("www".equalsIgnoreCase(subdomain[0])){
