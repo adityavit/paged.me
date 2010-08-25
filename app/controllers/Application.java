@@ -141,14 +141,14 @@ public class Application extends Controller {
 	}
 
 	public static void index() {
-		//to the homepage!
-		if ("www".equalsIgnoreCase(subdomain[0])){
-			render();
-		}
-		
 		//@todo, validation here.
 		//User user = User.findByFBUID(FB_COOKIE_MAP.get("uid"));
 		User user = User.findByFolioname(subdomain[0]);
+		
+		//to the homepage!
+		if ("www".equalsIgnoreCase(subdomain[0])){
+			render(user);
+		}
 		
 		//user not found, throw error!
 		notFoundIfNull(user);
