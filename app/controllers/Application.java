@@ -24,6 +24,7 @@ public class Application extends Controller {
 	
 	@Before
 	public static void extractSubDomain(){
+		//validation here.
 		subdomain = request.domain.split("\\.");
 	}
 
@@ -140,16 +141,20 @@ public class Application extends Controller {
 	}
 
 	public static void index() {
-//		User user = User.findByFBUID(FB_COOKIE_MAP.get("uid"));
+		//to the homepage!
+		if ("www".equalsIgnoreCase(subdomain[0])){
+			render();
+		}
 		
 		//@todo, validation here.
+		//User user = User.findByFBUID(FB_COOKIE_MAP.get("uid"));
 		User user = User.findByFolioname(subdomain[0]);
 		
 		//user not found, throw error!
 		notFoundIfNull(user);
 		
-		//user found, render the page.
-		render(user);
+		//to user folio page.
+		render("Application/folio.html", user);
 	}
 	
 	public static void resume(){
