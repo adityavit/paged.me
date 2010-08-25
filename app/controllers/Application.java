@@ -19,6 +19,8 @@ public class Application extends Controller {
 	@Before
 	public static void FBValidation() {
 		String fbcookies[], val[];
+		renderArgs.put("domain", "itsabt.me");
+
 		if (request.cookies.containsKey(FB_COOKIE)) {
 			fbcookies = request.cookies.get(FB_COOKIE).value.replace("\"", "")
 					.split("&");
