@@ -10,3 +10,4 @@ eclipse
 logs
 tmp
 public/designs
+war/WEB-INF/appengine-generated/
