@@ -11,7 +11,7 @@
   #{form @Application.addfolio(), id:'createfolio'}
     <p class="error">folioname iiis required.</p>
     <p>
-      <span class="domain">http://${domain}/</span>
+      <span class="domain">http://${APP_DOMAIN}/</span>
       <input class="domain" type="text" name="folioname"/>
       <input type="submit"/>
     </p>
@@ -19,14 +19,14 @@
   </li>
   <li class="folio-name #{if !user }hide#{/if}">
     #{if user }
-    <a href="http://${domain}/${user.folioname}">${domain}/${user.folioname}</a><span>, ah! your folio!</span>
+    <a href="http://${APP_DOMAIN}/${user.folioname}">${APP_DOMAIN}/${user.folioname}</a><span>, ah! your folio!</span>
     #{/if}
   </li>
   #{/if}
   </ul>
 </div>
 <div class="fb-banner">
-  <div class="contact"><a href="https://graph.facebook.com/oauth/authorize?client_id=113305982056815&redirect_uri=http://${domain}/&type=user_agent&display=page&scope=user_photos,user_videos,publish_stream,email,user_about_me,user_birthday">go ahead, etch one for yourself</a></div>
+  <div class="contact"><a href="https://graph.facebook.com/oauth/authorize?client_id=${FB_CLIENT}&redirect_uri=http://${APP_DOMAIN}/&type=user_agent&display=page&scope=user_photos,user_videos,publish_stream,email,user_about_me,user_birthday">go ahead, etch one for yourself</a></div>
 #{if !uid }
   <div class="login"><fb:login-button perms="email,user_birthday"></fb:login-button></div>
 #{/if}
@@ -36,7 +36,7 @@
 $(function(){
   $("#createfolio").submit(function(){
     $.post('@{addfolio()}', $("#createfolio").serialize(), function(folio){
-      $("ul li.folio-name").append('<a href="http://${domain}/'+folio.folioname+'">${domain}/'+folio.folioname+'</a><span>, ah! your folio!</span>');
+      $("ul li.folio-name").append('<a href="http://${APP_DOMAIN}/'+folio.folioname+'">${APP_DOMAIN}/'+folio.folioname+'</a><span>, ah! your folio!</span>');
       $("li.folio-form").hide("slow");
       $("li.folio-name").show("slow");
     }, 'json');
