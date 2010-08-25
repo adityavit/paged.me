@@ -11,6 +11,7 @@ import play.data.validation.Required;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.Logger;
+import play.Play;
 
 public class Application extends Controller {
 
@@ -20,19 +21,20 @@ public class Application extends Controller {
 	@Before
 	public static void FBValidation() {
 		String fbcookies[], val[];
-		renderArgs.put("domain", "itsabt.me");
-		Logger.debug("oh! this is working!!");
-
+		
 		if (request.cookies.containsKey(FB_COOKIE)) {
 			fbcookies = request.cookies.get(FB_COOKIE).value.replace("\"", "")
 					.split("&");
 			for (String arg : fbcookies) {
 				val = arg.split("=");
-				Logger.debug("cookie : " + val[0] + " :: " + val[1]);
 				FB_COOKIE_MAP.put(val[0], val[1]);
 				renderArgs.put(val[0], val[1]);
 			}
 		}
+		
+		String domain = Play.configuration.getProperty("application.domain");
+		renderArgs.put("domain", domain);
+		
 	}
 
 	public static void index() {
