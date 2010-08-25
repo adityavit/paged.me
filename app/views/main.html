@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/main.css'}">
 
     <!--- need to fix this. --->
-    <style id="user-foliostyle" type="text/css">#{if user}${user.style}#{/if}</style>
+    #{if user}<style id="user-foliostyle" type="text/css">${user.style}</style>#{/if}
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/jquery-ui.min.js"></script>
   </head>
