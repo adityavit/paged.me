@@ -1,9 +1,9 @@
 #{extends 'main.html' /}
-#{set title: 'paged.me!' /}
+#{set title: 'isabt.me!' /}
 #{set bodycss: 'container_24' /}
 
 <div class="name">Amigo!</div>
-<div class="about">this looks like a nice portfolio destination :D</div>
+<div class="about">this looks like a nice folio place!!</div>
 <div class="folio">
   <ul>
   #{if uid}
@@ -11,15 +11,15 @@
   #{form @Application.addfolio(), id:'createfolio'}
     <p class="error">folioname iiis required.</p>
     <p>
-      <span class="domain">http://${APP_DOMAIN}/</span>
       <input class="domain" type="text" name="folioname"/>
+      <span class="domain"> . ${APP_DOMAIN}/</span>
       <input type="submit"/>
     </p>
   #{/form}
   </li>
   <li class="folio-name #{if !user }hide#{/if}">
     #{if user }
-    <a href="http://${APP_DOMAIN}/${user.folioname}">${APP_DOMAIN}/${user.folioname}</a><span>, ah! your folio!</span>
+    <a href="http://${user.folioname}.${APP_DOMAIN}/">${user.folioname}.${APP_DOMAIN}/</a><span>, ah! your folio!</span>
     #{/if}
   </li>
   #{/if}
@@ -36,7 +36,7 @@
 $(function(){
   $("#createfolio").submit(function(){
     $.post('@{addfolio()}', $("#createfolio").serialize(), function(folio){
-      $("ul li.folio-name").append('<a href="http://${APP_DOMAIN}/'+folio.folioname+'">${APP_DOMAIN}/'+folio.folioname+'</a><span>, ah! your folio!</span>');
+      $("ul li.folio-name").append('<a href="http://' + folio.folioname + '.' + '${APP_DOMAIN}/">' + folio.folioname + '.${APP_DOMAIN}/</a><span>, ah! your folio!</span>');
       $("li.folio-form").hide("slow");
       $("li.folio-name").show("slow");
     }, 'json');
