@@ -15,14 +15,8 @@ POST    /addstyle                               Application.addStyle
 POST    /updatestyle                            Application.updateStyle
 
 GET     /                                       Application.index
-GET     /allteez                                Application.allTeez
-GET     /allteeziners                           Application.allTeeziners
-GET     /challenge                              Application.challenge
-
-GET     /{folioname}                            Application.folio
-GET     /{folioname}/all                        Application.folioall
-GET     /{folioname}/resume                     Application.resume
-GET     /{folioname}/showcase                   Application.showcase
+GET     /resume                                 Application.resume
+GET     /showcase                               Application.showcase
 
 #catch all
 *       /{controller}/{action}                  {controller}.{action}
