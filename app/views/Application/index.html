@@ -26,8 +26,8 @@
   </ul>
 </div>
 <div class="fb-banner">
-  <div class="contact"><a href="https://graph.facebook.com/oauth/authorize?client_id=${FB_CLIENT}&redirect_uri=http://${APP_DOMAIN}/&type=user_agent&display=page&scope=user_photos,user_videos,publish_stream,email,user_about_me,user_birthday">go ahead, etch one for yourself</a></div>
 #{if !uid }
+  <div class="contact"><a href="https://graph.facebook.com/oauth/authorize?client_id=${FB_CLIENT}&redirect_uri=http://${APP_DOMAIN}/&type=user_agent&display=page&scope=user_photos,user_videos,publish_stream,email,user_about_me,user_birthday">go ahead, etch one for yourself</a></div>
   <div class="login"><fb:login-button perms="email,user_birthday"></fb:login-button></div>
 #{/if}
 </div>
