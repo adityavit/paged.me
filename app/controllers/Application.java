@@ -10,22 +10,25 @@ import models.User;
 import play.data.validation.Required;
 import play.mvc.Before;
 import play.mvc.Controller;
+import play.Logger;
 
 public class Application extends Controller {
 
 	public static Map<String, String> FB_COOKIE_MAP = new HashMap<String, String>();
-	public static final String FB_COOKIE = "fbs_121671684547934";
+	public static final String FB_COOKIE = "fbs_113305982056815";
 
 	@Before
 	public static void FBValidation() {
 		String fbcookies[], val[];
 		renderArgs.put("domain", "itsabt.me");
+		Logger.debug("oh! this is working!!");
 
 		if (request.cookies.containsKey(FB_COOKIE)) {
 			fbcookies = request.cookies.get(FB_COOKIE).value.replace("\"", "")
 					.split("&");
 			for (String arg : fbcookies) {
 				val = arg.split("=");
+				Logger.debug("cookie : " + val[0] + " :: " + val[1]);
 				FB_COOKIE_MAP.put(val[0], val[1]);
 				renderArgs.put(val[0], val[1]);
 			}
