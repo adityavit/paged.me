@@ -16,15 +16,23 @@ import play.Play;
 public class Application extends Controller {
 
 	public static Map<String, String> FB_COOKIE_MAP = new HashMap<String, String>();
-	public static final String FB_COOKIE = "fbs_113305982056815";
+	public static final String FB_COOKIE = Play.configuration.getProperty("application.fbcookieid");
+	public static final String FB_CLIENT = Play.configuration.getProperty("application.fbclientid");
+	public static final String APP_DOMAIN = Play.configuration.getProperty("application.domain");
+	
+	public static String subdomain[];
+	
+	@Before
+	public static void extractSubDomain(){
+		subdomain = request.domain.split("\\.");
+	}
 
 	@Before
 	public static void FBValidation() {
 		String fbcookies[], val[];
 		
 		if (request.cookies.containsKey(FB_COOKIE)) {
-			fbcookies = request.cookies.get(FB_COOKIE).value.replace("\"", "")
-					.split("&");
+			fbcookies = request.cookies.get(FB_COOKIE).value.replace("\"", "").split("&");
 			for (String arg : fbcookies) {
 				val = arg.split("=");
 				FB_COOKIE_MAP.put(val[0], val[1]);
@@ -32,26 +40,17 @@ public class Application extends Controller {
 			}
 		}
 		
-		String domain = Play.configuration.getProperty("application.domain");
-		renderArgs.put("domain", domain);
-		
+		renderArgs.put("FB_CLIENT", FB_CLIENT);
+		renderArgs.put("APP_DOMAIN", APP_DOMAIN);
 	}
 
-	public static void index() {
-		//teeziner welcome page, we'd probably display a collection here.
-		User user = User.findByFBUID(FB_COOKIE_MAP.get("uid"));
-		render(user);
+	static String addNewCssField(String matched, String cssfv) {
+		return matched.replaceAll("}", cssfv + ";}");
+		// return matched.substring(0, matched.length() - 1) + cssfv + ";}";
 	}
-	
-	public static void folio(String folioname){
-		//@todo, validation here.
-		User user = User.findByFolioname(folioname);
-		
-		//user not found, throw error!
-		notFoundIfNull(user);
-		
-		//user found, render the page.
-		render(user);
+
+	static String addNewCssClass(String cname, String cssfv) {
+		return "." + cname + "{" + cssfv + ";}";
 	}
 
 	public static void addStyle(String cname, String cfield, String cvalue) {
@@ -85,15 +84,6 @@ public class Application extends Controller {
 		}
 		user.update();
 		renderJSON(user);
-	}
-
-	static String addNewCssField(String matched, String cssfv) {
-		return matched.replaceAll("}", cssfv + ";}");
-		// return matched.substring(0, matched.length() - 1) + cssfv + ";}";
-	}
-
-	static String addNewCssClass(String cname, String cssfv) {
-		return "." + cname + "{" + cssfv + ";}";
 	}
 
 	public static void updateStyle(String cssstyle) {
@@ -149,13 +139,22 @@ public class Application extends Controller {
 		}
 	}
 
-    public static void quick(){
-        render();
-    }
-
-	public static void resume(String folioname){
+	public static void index() {
+//		User user = User.findByFBUID(FB_COOKIE_MAP.get("uid"));
+		
 		//@todo, validation here.
-		User user = User.findByFolioname(folioname);
+		User user = User.findByFolioname(subdomain[0]);
+		
+		//user not found, throw error!
+		notFoundIfNull(user);
+		
+		//user found, render the page.
+		render(user);
+	}
+	
+	public static void resume(){
+		//@todo, validation here.
+		User user = User.findByFolioname(subdomain[0]);
 		
 		//user not found, throw error!
 		notFoundIfNull(user);
@@ -164,9 +163,9 @@ public class Application extends Controller {
 		render(user);
     }
 
-	public static void showcase(String folioname){
+	public static void showcase(){
 		//@todo, validation here.
-		User user = User.findByFolioname(folioname);
+		User user = User.findByFolioname(subdomain[0]);
 		
 		//user not found, throw error!
 		notFoundIfNull(user);
