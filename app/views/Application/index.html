@@ -18,7 +18,7 @@
   #{/form}
   </li>
   <li class="folio-name #{if !user }hide#{/if}">
-    #{if user }
+    #{if uid && user}
     <a href="http://${user.folioname}.${APP_DOMAIN}/">${user.folioname}.${APP_DOMAIN}</a><span> ah! your folio!</span>
     #{/if}
   </li>
