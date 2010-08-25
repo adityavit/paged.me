@@ -1,36 +1,31 @@
 package models;
 
 import java.util.*;
-import javax.persistence.*;
+import java.util.Collection;
 
-import play.db.jpa.*;
-import play.data.validation.*;
+import siena.*;
 
-@Entity
 public class User extends Model {
 	
-	@Required
+	@Id
+	public Long id;
+	
+	//fbuid
 	public String fbuid;
 	
 	//name of the user's portfolio; subdomain;
-	@Required
 	public String folioname;
 
 	//user name; and the display name;
-	@Required
 	public String name;
 
 	//user email for book keeping.
-	@Email
-	@Required
 	public String email;
 
 	//user about me.
-	@Required
 	public String aboutme;
 
 	//now this must be an address object of its own.
-	@Required
 	public String contact;
 
     //custom styling user has defined.
@@ -55,5 +50,29 @@ public class User extends Model {
 	
 	public String toString(){
 		return this.name;
+	}
+	
+	public static Query<User> all(){
+		return Model.all(User.class);
+	}
+	
+	public static Collection<User> findall(){
+		return all().fetch();
+	}
+	
+	public static User findById(Long Id){
+		return all().filter("id", Id).get();
+	}
+	
+	public static User findByFBUID(String fbuid){
+		return all().filter("fbuid", fbuid).get();
+	}
+	
+	public static User findByName(String name){
+		return all().filter("name", name).get();
+	}
+	
+	public static User findByFolioname(String folioname){
+		return all().filter("folioname", folioname).get();
 	}
 }

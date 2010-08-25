@@ -32,13 +32,13 @@ public class Application extends Controller {
 
 	public static void index() {
 		//teeziner welcome page, we'd probably display a collection here.
-		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
+		User user = User.findByFBUID(FB_COOKIE_MAP.get("uid"));
 		render(user);
 	}
 	
 	public static void folio(String folioname){
 		//@todo, validation here.
-		User user = User.find("byFolioname", folioname).first();
+		User user = User.findByFolioname(folioname);
 		
 		//user not found, throw error!
 		notFoundIfNull(user);
@@ -56,7 +56,7 @@ public class Application extends Controller {
 		String classregex = "." + cname + "(\\{(" + cfieldregx + cvalueregx + ";?)*?\\})";
 
 		// user null check; throw 404.
-		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
+		User user = User.findByFBUID(FB_COOKIE_MAP.get("uid"));
 		notFoundIfNull(user);
 
 		Pattern pattern = Pattern.compile(classregex, Pattern.CASE_INSENSITIVE);
@@ -76,7 +76,7 @@ public class Application extends Controller {
 		} else {
 			user.style = user.style.concat(addNewCssClass(cname, cssfv));
 		}
-		user.save();
+		user.update();
 		renderJSON(user);
 	}
 
@@ -90,19 +90,19 @@ public class Application extends Controller {
 	}
 
 	public static void updateStyle(String cssstyle) {
-		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
+		User user = User.findByFBUID(FB_COOKIE_MAP.get("uid"));
 		// user null check; throw 404.
 		notFoundIfNull(user);
 
 		// need a better check here.
 		user.style = cssstyle.toLowerCase();
-		user.save();
+		user.update();
 
 		renderJSON(user);
 	}
 
 	public static void addinfo(String fname, String fvalue) {
-		User user = User.find("byFbuid", FB_COOKIE_MAP.get("uid")).first();
+		User user = User.findByFBUID(FB_COOKIE_MAP.get("uid"));
 		
 		if ("name".equals(fname))
 			user.name = fvalue;
@@ -116,14 +116,14 @@ public class Application extends Controller {
 		if ("contact".equals(fname))
 			user.contact = fvalue;
 		
-		user.save();
+		user.update();
 		renderJSON("");
 	}
 
 	public static void addfolio(@Required String folioname) {
 		// @todo validation.
 		User user = new User(FB_COOKIE_MAP.get("uid"), folioname);
-		user.save();
+		user.insert();
 
 		renderJSON(user);
 	}
@@ -148,7 +148,7 @@ public class Application extends Controller {
 
 	public static void resume(String folioname){
 		//@todo, validation here.
-		User user = User.find("byFolioname", folioname).first();
+		User user = User.findByFolioname(folioname);
 		
 		//user not found, throw error!
 		notFoundIfNull(user);
@@ -159,7 +159,7 @@ public class Application extends Controller {
 
 	public static void showcase(String folioname){
 		//@todo, validation here.
-		User user = User.find("byFolioname", folioname).first();
+		User user = User.findByFolioname(folioname);
 		
 		//user not found, throw error!
 		notFoundIfNull(user);
