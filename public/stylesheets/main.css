@@ -7,29 +7,6 @@
     display: none;
 }
 
-.name {
-    font-size: 60px;
-    font-family: 'Inconsolata', serif;
-}
-
-.about {
-    font-size: 60px;
-    font-family: 'Tangerine', serif;
-    color: #ffffff;
-}
-
-.contact {
-    font-size: 20px;
-    font-family: 'Reenie Beanie', serif;
-    color: #ffffff;
-}
-
-.email {
-    font-size: 20px;
-    font-family: 'Reenie Beanie', serif;
-    color: #ffffff;
-}
-
 .editmode {
     display: none;
 }
@@ -136,15 +113,44 @@ textarea {
     display: none;
 }
 
-
+.clear{
+  clear:both;
+}
 
 /*******prakhar.css*********/
 body.prakhar {
+  color: #e28f38;
+  font-family: Arial;
+  background: #ffffff url(/public/images/prakhar.png) no-repeat;
+}
+body.prakhar div.container {
+  top: 50px;
+  left: 50px;
+  position: absolute;
+}
+body.prakhar div.cleft div.fld {
+  padding: 5px 20px 0 10px;
+  font-size: 10pt;
+  float: right;
+}
+body.prakhar div.cleft div.name {
+  font-size: 30pt;
+  letter-spacing: 4px;
+  padding: 10px 3px;
+}
+body.prakhar div.cleft {
+  background: #ffffff url(/public/images/prakharline.png) no-repeat right;
+  height: 210px;
+  float: left;
+
+}
+body.prakhar div.cright {
+  float:right;
+  margin: 100px 0 0 10px;
 }
 /*******uttara.css*********/
 body.uttara {
-  background-image: url(/public/images/uttara.png);
-  background-color:#000000 ;
+  background: #000000 url(/public/images/uttara.png) no-repeat;
   color: #E6E6E6;
   font-family: Georgia;
 }
@@ -162,7 +168,7 @@ body.uttara div.fld {
   font-size: 16pt;
 }
 body.uttara div.name {
-  background-image: url(/public/images/uttaraheader.png);
+  background: #000000 url(/public/images/uttaraheader.png) no-repeat;
   font-size: 60pt;
   height: 120px;
 }
