@@ -8,7 +8,6 @@
     
     <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/reset.css'}">
     <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/text.css'}">
-    <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/farbtastic.css'}">
     <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/main.css'}">
 
     <!--- need to fix this. --->
@@ -18,9 +17,10 @@
   </head>
   <body class="body #{get 'bodycss' /}">
     #{doLayout /}
+    <script src="@{'/public/javascripts/main.js'}"></script>
+    <!--- 
     <div id="fb-root"></div>
     <script src="@{'/public/javascripts/farbtastic.js'}"></script>
-    <script src="@{'/public/javascripts/main.js'}"></script>
     <script src="http://connect.facebook.net/en_US/all.js"></script>
     <script type="text/javascript">
     FB.init({appId: '${FB_CLIENT}', status: true, cookie: true, xfbml: true});
@@ -32,6 +32,7 @@
         // The user has logged out, and the cookie has been cleared
       }
     });
-    </script>
+    </script
+    --->
   </body>
 </html>
