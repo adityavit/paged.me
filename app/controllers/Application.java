@@ -148,6 +148,18 @@ public class Application extends Controller {
 		if ("prakhar".equalsIgnoreCase(subdomain[0])){
 			render("Application/prakhar.html");
 		}
+		//to uttara!
+		if ("uttara".equalsIgnoreCase(subdomain[0])){
+			render("Application/uttara.html");
+		}
+		//to gopi!
+		if ("gopi".equalsIgnoreCase(subdomain[0])){
+			render("Application/gopi.html");
+		}
+		//to rajat!
+		if ("rajat".equalsIgnoreCase(subdomain[0])){
+			render("Application/rajat.html");
+		}
 		
 		//@todo, validation here.
 		User user = User.findByFolioname(subdomain[0]);
