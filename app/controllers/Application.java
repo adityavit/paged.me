@@ -141,9 +141,16 @@ public class Application extends Controller {
 	}
 
 	public static void index() {
+		
+		Logger.debug("domain-requested" + subdomain[0]);
+		System.out.println("subdomain, " + subdomain[0]);
+		//to prakhar!
+		if ("prakhar".equalsIgnoreCase(subdomain[0])){
+			render("Application/prakhar.html");
+		}
+		
 		//@todo, validation here.
 		User user = User.findByFolioname(subdomain[0]);
-		Logger.debug("domain-requested" + subdomain[0]);
 		
 		//to the homepage!
 		if ("www".equalsIgnoreCase(subdomain[0])){
@@ -168,7 +175,7 @@ public class Application extends Controller {
 		//user found, render the page.
 		render(user);
     }
-
+	
 	public static void showcase(){
 		//@todo, validation here.
 		User user = User.findByFolioname(subdomain[0]);
