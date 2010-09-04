@@ -139,3 +139,46 @@ textarea {
 
 
 /*******prakhar.css*********/
+body.prakhar {
+}
+/*******uttara.css*********/
+body.uttara {
+  background-image: url(/public/images/uttara.png);
+  background-color:#000000 ;
+  color: #E6E6E6;
+  font-family: Arial;
+}
+body.uttara div.container {
+  top: 50px;
+  left: 50px;
+  width: 450px;
+  padding: 30px 10px;
+  position: absolute;
+  background-color: #000000;
+}
+body.uttara div.fld {
+  border-bottom: 2px dashed #ffffff;
+  padding: 4px 0 3px 0;
+  font-size: 16pt;
+}
+body.uttara div.name {
+  background-image: url(/public/images/uttaraheader.png);
+  font-size: 60pt;
+  height: 120px;
+}
+body.uttara div.desig {
+  font-size: 10pt;
+  text-align: right;
+}
+body.uttara div.contact {
+  margin-bottom: 40px;
+}
+body.uttara span.exp {
+  float: right;
+}
+/*******gopi.css*********/
+body.gopi {
+}
+/*******rajat.css*********/
+body.rajat {
+}
