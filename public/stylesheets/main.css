@@ -183,8 +183,10 @@ body.uttara span.exp {
   float: right;
 }
 /*******gopi.css*********/
-body.gopi {
-}
+body.gopi { width: 500px; margin: 250px  auto; background-color: #ffffff; }
+body.gopi div.name { font-family: 'Yanone Kaffeesatz', arial, serif; font-size: 60px; }
+body.gopi a { text-decoration: none; color: #BCBDAC; }
+body.gopi a:hover { text-decoration: overline; color: #2E2633; }
 /*******rajat.css*********/
 body.rajat {
 }
