@@ -1,10 +1,9 @@
-.body { /* the page-body class */
-    background: #69D2E7;
-    overflow: hidden;
+body {
+  overflow: hidden;
 }
 
 .hide, .error {
-    display: none;
+  display: none;
 }
 
 .editmode {
@@ -214,10 +213,12 @@ body.uttara span.exp {
   float: right;
 }
 /*******gopi.css*********/
-body.gopi { width: 500px; margin: 250px  auto; background-color: #ffffff; }
-body.gopi div.name { font-family: 'Yanone Kaffeesatz', arial, serif; font-size: 60px; }
+body.gopi { margin-left:auto;margin-right:auto;width:960px; height:600px; background-color:#ffffff; }
 body.gopi a { text-decoration: none; color: #BCBDAC; }
 body.gopi a:hover { text-decoration: overline; color: #2E2633; }
-/*******rajat.css*********/
-body.rajat {
-}
+body.gopi div.container { padding: 250px 0 0 350px; }
+body.gopi div.name { font-family: 'Yanone Kaffeesatz', arial; font-size: 60px; }
+body.gopi .head{ height:10px; width:10px; background:black; position:absolute; top:30px; left:30px; display:none;}
+body.gopi .box{ height:10px; width:10px; background:green; position:absolute; top:30px; left:30px; display:none;}
+body.gopi .plant{ height:10px; width:10px; background:red; position:absolute; top:10px; left:10px; display:none;}
+
