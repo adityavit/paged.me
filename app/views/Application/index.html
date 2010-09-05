@@ -1,0 +1,10 @@
+#{extends 'main.html' /}
+#{set bodycss: 'www' /}
+#{set title: 'itsabt.me' /}
+
+<div class="container">
+  #{form @Application.invite(), id:'addmail'}
+    <input type="text" value="send me an invite.">
+    <input type="submit">
+  #{/form}
+</div>

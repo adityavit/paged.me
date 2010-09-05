@@ -197,4 +197,7 @@ public class Application extends Controller {
 		render(user);
     }
 	
+	public static void invite(String email){
+		
+	}
 }
