@@ -90,8 +90,6 @@ input[type = text] {
     border: 1px #e0e0e0 solid;
     color: #000000;
     background: #ffffff;
-    font-size: 30px;
-    font-family: 'Reenie Beanie', serif;
 }
 
 textarea {
@@ -116,7 +114,40 @@ textarea {
 .clear{
   clear:both;
 }
-
+/*******www.css*********/
+body.www {
+  width: 500px;
+  margin: 300px auto;
+  background: #ffffff url(/public/images/bkgrnd2.png) no-repeat;
+  font-size: 30px;
+  font-family: 'Reenie Beanie', serif;
+}
+body.www input {
+    padding: 5px;
+    width: 300px;
+    border: 4px #e0e0e0 solid;
+    border-right: none;
+    color: #000000;
+    background: #ffffff;
+    margin: 0;
+    font-size: 30px;
+    font-family: 'Reenie Beanie', serif;
+}
+body.www input[type = submit]:hover {
+    background: #666666;
+    color: #ffffff;
+    cursor: pointer;
+}
+body.www input[type = submit] {
+    width: 170px;
+    border: 4px #e0e0e0 solid;
+    border-left: none;
+    background: #00b8d7;
+    margin-left: -12px;
+}
+body.www .thank {
+  text-align: center;
+}
 /*******prakhar.css*********/
 body.prakhar {
   color: #e28f38;

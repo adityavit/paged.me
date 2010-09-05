@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import models.User;
+import models.Invite;
 import play.data.validation.Required;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -184,7 +185,7 @@ public class Application extends Controller {
 		
 		//user found, render the page.
 		render(user);
-    }
+	}
 	
 	public static void showcase(){
 		//@todo, validation here.
@@ -195,9 +196,11 @@ public class Application extends Controller {
 		
 		//user found, render the page.
 		render(user);
-    }
+	}
 	
 	public static void invite(String email){
-		
+		Invite invite = new Invite(email);
+		invite.insert();
+		renderJSON(invite);
 	}
 }
