@@ -4,35 +4,17 @@
     <title>#{get 'title' /}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine|Inconsolata|Droid+Sans|Reenie+Beanie|IM+Fell+DW+Pica">
-    
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Tangerine|Inconsolata|Droid+Sans|Reenie+Beanie|IM+Fell+DW+Pica|Yanone+Kaffeesatz">
     <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/reset.css'}">
     <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/text.css'}">
     <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/main.css'}">
-
-    <!--- need to fix this. --->
     #{if user}<style id="user-foliostyle" type="text/css">${user.style}</style>#{/if}
+    
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.3/jquery-ui.min.js"></script>
+    <script src="@{'/public/javascripts/main.js'}"></script>
   </head>
   <body class="body #{get 'bodycss' /}">
     #{doLayout /}
-    <script src="@{'/public/javascripts/main.js'}"></script>
-    <!--- 
-    <div id="fb-root"></div>
-    <script src="@{'/public/javascripts/farbtastic.js'}"></script>
-    <script src="http://connect.facebook.net/en_US/all.js"></script>
-    <script type="text/javascript">
-    FB.init({appId: '${FB_CLIENT}', status: true, cookie: true, xfbml: true});
-    FB.Event.subscribe('auth.sessionChange', function(response) {
-      if (response.session) {
-        window.location.reload();
-        // A user has logged in, and a new cookie has been saved
-      } else {
-        // The user has logged out, and the cookie has been cleared
-      }
-    });
-    </script
-    --->
   </body>
 </html>
