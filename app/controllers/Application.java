@@ -159,15 +159,14 @@ public class Application extends Controller {
 		if ("rajat".equalsIgnoreCase(subdomain[0])){
 			render("Application/rajat.html");
 		}
+		//to homepage!
+		if ("www".equalsIgnoreCase(subdomain[0])){
+			render("Application/index.html");
+		}
 		
 		//@todo, validation here.
 		User user = User.findByFolioname(subdomain[0]);
 		
-		//to the homepage!
-		if ("www".equalsIgnoreCase(subdomain[0])){
-			user = User.findByFBUID(FB_COOKIE_MAP.get("uid"));
-			render("Application/index.html", user);
-		}
 		
 		//user not found, throw error!
 		notFoundIfNull(user);
