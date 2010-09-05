@@ -5,10 +5,10 @@
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 
-#static routes for quick style tests.
-GET     /quick                                  Application.quick
+#invite
+POST    /invite                                Application.invite
 
-#teeziner routes
+#folio edit routes
 POST    /addinfo                                Application.info
 POST    /addfolio                               Application.addfolio
 POST    /addstyle                               Application.addStyle
