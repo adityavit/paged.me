@@ -143,7 +143,6 @@ public class Application extends Controller {
 	public static void index() {
 		
 		Logger.debug("domain-requested" + subdomain[0]);
-		System.out.println("subdomain, " + subdomain[0]);
 		//to prakhar!
 		if ("prakhar".equalsIgnoreCase(subdomain[0])){
 			render("Application/prakhar.html");
