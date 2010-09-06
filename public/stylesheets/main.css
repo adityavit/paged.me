@@ -223,12 +223,11 @@ body.uttara .name {
   font-size: 60pt;
   height: 120px;
 }
-body.uttara h3.desig {
+body.uttara div.desig {
+  border-bottom: 2px dashed #ffffff;
   font-size: 10pt;
   text-align: right;
   margin-bottom: 10px;
-}
-body.uttara .contact {
 }
 body.uttara span.exp {
   float: right;
