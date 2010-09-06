@@ -235,15 +235,4 @@ body.gopi div.name { font-family: 'Yanone Kaffeesatz', arial; font-size: 60px; }
 body.gopi .head{ height:10px; width:10px; background:black; position:absolute; top:30px; left:30px; display:none;}
 body.gopi .box{ height:10px; width:10px; background:green; position:absolute; top:30px; left:30px; display:none;}
 body.gopi .plant{ height:10px; width:10px; background:red; position:absolute; top:10px; left:10px; display:none;}
-body.gopi .scorebd{ 
-  height:30px; 
-  width:100%; 
-  background:red; 
-  position:absolute; 
-  bottom:0px; 
-  left:0px; 
-  display:block;
-  text-align: center;
-  font-size: 15px;
-  padding: 4px 0;
-}
+body.gopi .scorebd{ height:30px; width:100%;  background:red; position:absolute; bottom:0px; left:0px; display:block; text-align: center; font-size: 15px; padding: 4px 0; }

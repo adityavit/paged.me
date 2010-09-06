@@ -46,7 +46,7 @@ $(document).ready(function(){
         $(this).css('height', '33px');
       }).live('mouseout', function(){
         $(this).css('height', '30px');
-      }).fadeOut(10000);
+      }).fadeOut(15000);
     }
     
     init();
