@@ -149,7 +149,7 @@ body.www .thank {
 }
 /*******prakhar.css*********/
 body.prakhar {
-  color: #e28f38;
+  color: #a1502e;
   font-family: Arial;
   background: #ffffff url(/public/images/prakhar.png) no-repeat;
 }
@@ -158,12 +158,20 @@ body.prakhar div.container {
   left: 50px;
   position: absolute;
 }
-body.prakhar div.cleft div.fld {
-  padding: 5px 20px 0 10px;
-  font-size: 10pt;
+body.prakhar div.cleft div.fld,
+body.prakhar a {
   float: right;
+  color: #a1502e;
+  font-size: 10pt;
+  text-decoration: none;
+  padding: 5px 20px 0 10px;
+}
+body.prakhar a:hover {
+  color: #e28f38;
+  font-style: italic;
 }
 body.prakhar div.cleft div.name {
+  color: #e28f38;
   font-size: 30pt;
   letter-spacing: 4px;
   padding: 10px 3px;
@@ -172,11 +180,17 @@ body.prakhar div.cleft {
   background: #ffffff url(/public/images/prakharline.png) no-repeat right;
   height: 210px;
   float: left;
-
 }
 body.prakhar div.cright {
   float:right;
   margin: 100px 0 0 10px;
+}
+body.prakhar div.line1 {
+  letter-spacing: 2px;
+}
+body.prakhar div.line2 {
+  letter-spacing: 2px;
+  padding-bottom: 4px;
 }
 /*******uttara.css*********/
 body.uttara {
