@@ -6,13 +6,13 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import models.User;
 import models.Invite;
+import models.User;
+import play.Logger;
+import play.Play;
 import play.data.validation.Required;
 import play.mvc.Before;
 import play.mvc.Controller;
-import play.Logger;
-import play.Play;
 
 public class Application extends Controller {
 
@@ -189,13 +189,13 @@ public class Application extends Controller {
 	
 	public static void showcase(){
 		//@todo, validation here.
-		User user = User.findByFolioname(subdomain[0]);
+//		User user = User.findByFolioname(subdomain[0]);
 		
 		//user not found, throw error!
-		notFoundIfNull(user);
+//		notFoundIfNull(user);
 		
 		//user found, render the page.
-		render(user);
+		render();
 	}
 	
 	public static void invite(String email){

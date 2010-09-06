@@ -2,21 +2,22 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Map static resources from the /app/public folder to the /public path
-GET     /public/                                staticDir:public
+#folio view.
+GET     /                                       Application.index
+GET     /resume                                 Application.resume
+GET     /showcase                               Application.showcase
 
-#invite
-POST    /invite                                Application.invite
+#folio invite.
+POST    /invite                                 Application.invite
 
-#folio edit routes
+#folio edit.
 POST    /addinfo                                Application.info
 POST    /addfolio                               Application.addfolio
 POST    /addstyle                               Application.addStyle
 POST    /updatestyle                            Application.updateStyle
 
-GET     /                                       Application.index
-GET     /resume                                 Application.resume
-GET     /showcase                               Application.showcase
+# Map static resources from the /app/public folder to the /public path
+GET     /public/                                staticDir:public
 
 #catch all
 *       /{controller}/{action}                  {controller}.{action}
