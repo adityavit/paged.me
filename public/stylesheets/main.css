@@ -206,22 +206,29 @@ body.uttara div.container {
   position: absolute;
   background-color: #000000;
 }
-body.uttara div.fld {
+body.uttara h3.fld {
   border-bottom: 2px dashed #ffffff;
   padding: 4px 0 3px 0;
   font-size: 16pt;
+  cursor: pointer;
+  margin-bottom: 3px;
 }
-body.uttara div.name {
+body.uttara div.fld {
+  margin: 0 0 10px 0;
+  padding: 10px 0 3px 0;
+  font-size: 12pt;
+}
+body.uttara .name {
   background: #000000 url(/public/images/uttaraheader.png) no-repeat;
   font-size: 60pt;
   height: 120px;
 }
-body.uttara div.desig {
+body.uttara h3.desig {
   font-size: 10pt;
   text-align: right;
+  margin-bottom: 10px;
 }
-body.uttara div.contact {
-  margin-bottom: 40px;
+body.uttara .contact {
 }
 body.uttara span.exp {
   float: right;
