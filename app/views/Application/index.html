@@ -3,11 +3,13 @@
 #{set title: 'itsabt.me' /}
 
 <div class="container">
-  #{form @Application.invite(), id:'invite'}
-    <input type="text" name="email" value="typein your email.">
-    <input type="submit" value="invite me!">
-  #{/form}
-  <div class="thank hide">Thanks, we'll get back.</div>
+  <div class="invcontainer">
+    #{form @Application.invite(), id:'invite'}
+      <input type="text" name="email" value="type in your email.">
+      <input type="submit" value="invite me!">
+    #{/form}
+    <div class="thank hide">Thanks, we'll get back.</div>
+  </div>
 </div>
 <script type="text/javascript">
 $(function(){
