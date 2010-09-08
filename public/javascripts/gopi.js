@@ -2,13 +2,29 @@ $(document).ready(function(){
 
     var plants = [];
     function plant(){
+        this.type = Math.floor(Math.random() * 3);
         this.px = Math.floor(Math.random() * 890) + 10;
         this.py = Math.floor(Math.random() * 490) + 10;
+
         this.el = $('<div>').addClass('plant').appendTo('body').css('top', this.py + 'px').css('left', this.px + 'px').css('display', 'block');
+        if (this.type == 0){
+            //eat reds; and you die.
+            this.el.css('background', 'red');
+        }
+        if (this.type == 1){
+            //eat blue; +5 pts.
+            this.el.css('background', 'blue');
+        }
+        if (this.type == 2){
+            //eat yellow +10 pts.
+            this.el.css('background', 'yellow');
+        }
+
     }
     
     var snakes = [];
     function snake(){
+        this.score = 0;
         this.dr = 'right';
         this.snkblks = [];
         
@@ -41,12 +57,12 @@ $(document).ready(function(){
     }
     
     function scoreboard() {
-      $('<div>').addClass('scorebd').appendTo('body').text("use arrow keys to control your snake! eat red plants.");
+      $('<div>').addClass('scorebd').appendTo('body').text("use arrow keys to control your snake! eat red plants.").fadeOut(3000);
       $('.scorebd').live('mouseover', function(){
         $(this).css('height', '33px');
       }).live('mouseout', function(){
         $(this).css('height', '30px');
-      }).fadeOut(15000);
+      });
     }
     
     init();
@@ -108,13 +124,38 @@ $(document).ready(function(){
                   var yd = Math.abs(pt.py - yy);
                   if (xd < 10 && yd < 10) {
                       $(pt.el).remove();
+                    
+                      ptyp = pt.type;
+
+                      if (ptyp == 1)
+                        snke.score = snke.score + 5;
+
+                      if (ptyp == 2)
+                        snke.score = snke.score + 10;
+
+                      if (ptyp == 0) {
+                        //you die.
+                        var blk = 0;
+                        for(i=0; i<snkblks.length; i++){
+                          blk = snkblks[i];
+                          $(blk.el).fadeOut();
+                        };
+                        snakes.splice(0, 1);
+                        $('.scorebd').text('game over! you are dead : ' + snke.score + ', refresh to play again.').fadeIn();
+                        return;
+                      }
+                    
                       plants.splice(i, 1);
-                      var skblk = new snkblk();
-                      skblk.xx = snkblks[snkblks.length - 1].oxx;
-                      skblk.yy = snkblks[snkblks.length - 1].oyy;
-                      snkblks.push(skblk);
-//                        pt = new plant();
-//                        plants.push(pt);
+                      $('.scorebd').text('your score : ' + snke.score).fadeIn();
+
+                      for (i=0; i<ptyp; i++) {
+                        var skblk = new snkblk();
+                        skblk.xx = snkblks[snkblks.length - 1].oxx;
+                        skblk.yy = snkblks[snkblks.length - 1].oyy;
+                        snkblks.push(skblk);
+                        pt = new plant();
+                        plants.push(pt);
+                      }
                     }
                 };
             } else {
