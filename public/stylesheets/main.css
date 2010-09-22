@@ -172,7 +172,8 @@ body.www input[type = submit] {
     margin-left: -12px;
 }
 body.www .thank {
-  text-align: center;
+  /*text-align: center;*/
+  padding-left: 120px;
 }
 /*******prakhar.css*********/
 body.prakhar {
