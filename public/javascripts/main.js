@@ -35,7 +35,7 @@ $(document).ready(function(){
     "uttara_f992e816765b9e7adbe33e1883b8c28fbf5bfcd04b0abe6addb99f8f.png",
     "uttara_5a16bd246eb1c14f33b7feeaea0b57dcb004cc2820a13869cf8c3638.png",
     "uttara_fcaa74946c749a9bed13f2bb24558d9c7e8836980ce37f45883eba8c.png",
-    "uttara_5e43567df51b307e69de1f5b7291459e844447ce5f6a3bb5a6cea166.png"
+    "uttara_5e43567df51b307e69de1f5b7291459e844447ce5f6a3bb5a6cea166.png",
   ]
   
   $("img.workimg").attr("src", prefix + imgs[0]);
@@ -55,6 +55,5 @@ $(document).ready(function(){
       }
       $("img.workimg").attr("src", prefix + imgs[curimg]);
   });
-  
 });
 
